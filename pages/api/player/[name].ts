@@ -81,7 +81,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       headers: { "Access-Token": process.env.VIME_API_KEY },
     })
       .then((res) => res.data)
-      .then((data: IUserStatsRaw & IError) => data)
+      .then((data: IUserStatsRaw & IError) => data.stats)
       .catch((err: Error) => {
         throw err;
       });
