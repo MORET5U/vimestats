@@ -17,6 +17,8 @@
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "skinview-utils": "^0.5.9",
+    "skinview3d": "^2.0.0-beta.1",
     "three": "^0.121.1",
     "uuid": "^8.3.1",
     "vime-types": "^0.1.3"
