@@ -1,11 +1,7 @@
 import { Component, RefObject, createRef, Fragment } from "react";
-import {
-  SkinViewer,
-  FXAASkinViewer,
-  WalkingAnimation,
-  createOrbitControls,
-} from "skinview3d";
-// import { createOrbitControls } from "../src/lib/skinview3d/orbit_controls";
+import { SkinViewer } from "../libs/skinview3d/viewer";
+import { WalkingAnimation } from "../libs/skinview3d/animation";
+import { createOrbitControls } from "../libs/skinview3d/orbit_controls";
 import { v4 as uuid } from "uuid";
 
 type Props = {
@@ -19,7 +15,7 @@ type Props = {
 };
 
 type State = {
-  viewer?: SkinViewer | FXAASkinViewer;
+  viewer?: SkinViewer;
   reqID?: string;
 };
 
@@ -41,9 +37,12 @@ export default class Skin3d extends Component<Props> {
 
     this.setState(
       {
-        viewer: new FXAASkinViewer({
+        viewer: new SkinViewer({
+          domElement: this.skinviewRef?.current!,
           width: this.props.width,
           height: this.props.height,
+          skinUrl: `https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`,
+          capeUrl: `https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`,
         }),
       },
       () => {
@@ -54,13 +53,6 @@ export default class Skin3d extends Component<Props> {
           enablePan,
           walkingSpeed,
         } = this.props;
-
-        viewer!.loadSkin(
-          `https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`
-        );
-        viewer!.loadCape(
-          `https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`
-        );
 
         const walk = viewer!.animations.add(WalkingAnimation);
         walk.speed = walkingSpeed || 0.7;
@@ -74,7 +66,7 @@ export default class Skin3d extends Component<Props> {
   }
 
   public componentWillUnmount() {
-    // console.log("[Skin3d] Cleaing up the component...");
+    console.log("[Skin3d] Cleaing up the component...");
 
     this.setState({
       viewer: undefined,
@@ -89,12 +81,8 @@ export default class Skin3d extends Component<Props> {
       console.log("[Skin3d] Component received new username prop.");
 
       // Reassigning new skin and cape for the viewer
-      viewer!.loadSkin(
-        `https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`
-      );
-      viewer!.loadCape(
-        `https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`
-      );
+      viewer!.skinUrl = `https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`;
+      viewer!.capeUrl = `https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`;
     }
 
     if (
