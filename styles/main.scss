@@ -9,8 +9,7 @@
 
 * {
   margin: 0;
-  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Helvetica Neue",
-    sans-serif !important;
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Helvetica Neue", sans-serif !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
@@ -38,10 +37,10 @@
   font-weight: bold;
 }
 
-.playerSkinCanvasParent {
-  canvas {
-    outline: none !important;
-  }
+.playerSkinCanvasParent,
+.playerSkinCanvasParent:focus,
+.playerSkinCanvasParent:hover {
+  outline: none !important;
 }
 
 .shadow {
@@ -63,13 +62,8 @@
 }
 
 .lightChecker {
-  background-image: linear-gradient(
-      to right,
-      rgba(192, 192, 192, 0.75),
-      rgba(192, 192, 192, 0.75)
-    ),
-    linear-gradient(to right, black 50%, white 50%),
-    linear-gradient(to bottom, black 50%, white 50%);
+  background-image: linear-gradient(to right, rgba(192, 192, 192, 0.75), rgba(192, 192, 192, 0.75)),
+    linear-gradient(to right, black 50%, white 50%), linear-gradient(to bottom, black 50%, white 50%);
   background-blend-mode: normal, difference, normal;
   background-size: 12.5% 12.5%;
 }
