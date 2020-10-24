@@ -5709,19 +5709,6 @@ signal-exit@^3.0.0:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
-skinview-utils@^0.5.9:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/skinview-utils/-/skinview-utils-0.5.9.tgz#6238bce17e37e040fd849eb0ebdcffd2191c9224"
-  integrity sha512-XVEanmZ22BDAydrPeLxHt0oSzcU282EhLPYzhJSDXtn7qcvehWJUQDZwAdYPW8DN+xQMRNHx6ZaKATMVq81KyQ==
-
-skinview3d@^2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/skinview3d/-/skinview3d-2.0.0-beta.1.tgz#47aa2089e7cd6aaf17eedffd5eb2ac2110d107b5"
-  integrity sha512-veTHp/CP5c9URjnKHLBNFAK6FXJWtYtppgjGUZMcEiDLFNsSF7xVizKvwecFwukvT+q12KzoU8dDkvyKGmVftQ==
-  dependencies:
-    skinview-utils "^0.5.9"
-    three "^0.121.1"
-
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
