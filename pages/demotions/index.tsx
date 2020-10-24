@@ -17,15 +17,13 @@ class DemotionsPage extends Component<Props> {
     const { search } = query;
 
     try {
-      let data;
+      let reqURL;
 
-      if (!search) {
-        const req = await Axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/demotions`);
-        data = await req.data;
-      } else {
-        const req = await Axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/demotions?search=${search}`);
-        data = await req.data;
-      }
+      if (!search) reqURL = `${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/demotions`;
+      else reqURL = `${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/demotions?search=${search}`;
+
+      const req = await Axios.get(reqURL);
+      const data = await req.data;
 
       return { data: data.items, search };
     } catch (e) {
