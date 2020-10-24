@@ -1,0 +1,17 @@
+.demotionPaper {
+  padding: 16px;
+}
+
+.publicSource {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+}
+
+.publicSource:hover {
+  text-decoration: underline;
+}
+
+.demotionPostText {
+  font-size: 1rem;
+}

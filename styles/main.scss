@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@font-face {
+  font-family: "Minecraft";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Minecraft"), url("minecraft.ttf") format("truetype");
+}
+
+* {
+  margin: 0;
+  font-family: "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Helvetica Neue",
+    sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+.minecraftFont {
+  font-family: "Minecraft" !important;
+}
+
+.tooltipModified {
+  font-size: 0.7rem !important;
+}
+
+.friendName {
+  opacity: 1 !important;
+  transition: all ease-in 0.2s;
+}
+
+.friendName:hover {
+  opacity: 0.6 !important;
+  transition: all ease-in 0.2s;
+}
+
+.expansionPanelSummary {
+  font-size: 1rem !important;
+  font-weight: bold;
+}
+
+.playerSkinCanvasParent {
+  canvas {
+    outline: none !important;
+  }
+}
+
+.shadow {
+  filter: drop-shadow(-4px 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes skinCanvasBgAnimation {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 80000px 80000px;
+  }
+}
+
+.checkerAnimation {
+  animation: skinCanvasBgAnimation 4000s linear;
+  animation-iteration-count: infinite;
+}
+
+.lightChecker {
+  background-image: linear-gradient(
+      to right,
+      rgba(192, 192, 192, 0.75),
+      rgba(192, 192, 192, 0.75)
+    ),
+    linear-gradient(to right, black 50%, white 50%),
+    linear-gradient(to bottom, black 50%, white 50%);
+  background-blend-mode: normal, difference, normal;
+  background-size: 12.5% 12.5%;
+}
+
+.paper {
+  padding: 16px;
+}

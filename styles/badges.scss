@@ -1,0 +1,96 @@
+.badPerson {
+  color: #fbb848 !important;
+  font-size: 1.8rem !important;
+  vertical-align: -0.25rem !important;
+}
+
+.badgeTooltip {
+  font-size: 0.7rem !important;
+}
+
+.playerBadge {
+  width: 30px !important;
+  vertical-align: -0.1em !important;
+}
+
+.goodModeratorBadge {
+  color: #4777e6 !important;
+  vertical-align: -0.25em !important;
+  font-size: 1.75rem !important;
+}
+
+.banHammer3000 {
+  font-size: 1.8rem !important;
+  color: #f04747 !important;
+  vertical-align: -0.2em !important;
+}
+
+.projectSupporterBadge {
+  font-size: 1.7rem !important;
+  color: #d43e3e !important;
+  vertical-align: -0.22em !important;
+}
+
+.contributorBadge {
+  font-size: 1.525rem !important;
+  color: #9c44a9 !important;
+  vertical-align: -0.25rem !important;
+}
+
+.vimeAdminBadge {
+  color: #fbb848 !important;
+  font-size: 1.8rem !important;
+  vertical-align: -0.28rem !important;
+}
+
+.developerBadge {
+  color: #bb86fc !important;
+  font-size: 1.75rem !important;
+  vertical-align: -0.18em !important;
+}
+
+.badgesInfo-title {
+  font-size: 2.5rem !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  margin-bottom: 1rem !important;
+}
+
+.badgesInfo-text {
+  font-size: 1.1rem !important;
+  font-weight: normal !important;
+}
+
+.badgesInfo-container {
+  justify-content: center !important;
+  text-align: center !important;
+  margin-top: 10% !important;
+}
+
+.badgesInfo-paper {
+  padding: 16px 16px 16px 16px !important;
+}
+
+@media (min-width: 576px) {
+  .badgeBox {
+    padding-left: 10% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .badgeBox {
+    padding-left: 12% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .badgeBox {
+    padding-left: 15% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .badgeBox {
+    padding-left: 20% !important;
+  }
+}
