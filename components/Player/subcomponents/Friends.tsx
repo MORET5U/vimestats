@@ -50,7 +50,7 @@ const Friends: FunctionComponent<Props> = ({ friends, user }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
