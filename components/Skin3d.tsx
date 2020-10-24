@@ -1,7 +1,5 @@
 import { Component, RefObject, createRef, Fragment } from "react";
-import { SkinViewer } from "../libs/skinview3d/viewer";
-import { WalkingAnimation } from "../libs/skinview3d/animation";
-import { createOrbitControls } from "../libs/skinview3d/orbit_controls";
+import { SkinViewer, WalkingAnimation, createOrbitControls } from "../libs/skinview3d";
 import { v4 as uuid } from "uuid";
 
 type Props = {
@@ -20,7 +18,7 @@ type State = {
 };
 
 export default class Skin3d extends Component<Props> {
-  public skinviewRef: RefObject<HTMLDivElement>;
+  public skinviewRef: RefObject<HTMLCanvasElement>;
   public state: State;
 
   constructor(props: Props) {
@@ -38,21 +36,17 @@ export default class Skin3d extends Component<Props> {
     this.setState(
       {
         viewer: new SkinViewer({
-          domElement: this.skinviewRef?.current!,
+          canvas: this.skinviewRef?.current!,
           width: this.props.width,
           height: this.props.height,
-          skinUrl: `https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`,
-          capeUrl: `https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`,
         }),
       },
       () => {
         const { viewer } = this.state;
-        const {
-          enableRotate,
-          enableZoom,
-          enablePan,
-          walkingSpeed,
-        } = this.props;
+        const { enableRotate, enableZoom, enablePan, walkingSpeed } = this.props;
+
+        viewer!.loadSkin(`https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`);
+        viewer!.loadCape(`https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`);
 
         const walk = viewer!.animations.add(WalkingAnimation);
         walk.speed = walkingSpeed || 0.7;
@@ -81,14 +75,11 @@ export default class Skin3d extends Component<Props> {
       console.log("[Skin3d] Component received new username prop.");
 
       // Reassigning new skin and cape for the viewer
-      viewer!.skinUrl = `https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`;
-      viewer!.capeUrl = `https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`;
+      viewer!.loadSkin(`https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`);
+      viewer!.loadCape(`https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`);
     }
 
-    if (
-      prevProps.width !== this.props.width ||
-      prevProps.height !== this.props.height
-    ) {
+    if (prevProps.width !== this.props.width || prevProps.height !== this.props.height) {
       viewer!.setSize(this.props.width!, this.props.height!);
     }
   }
@@ -96,11 +87,7 @@ export default class Skin3d extends Component<Props> {
   public render() {
     return (
       <Fragment>
-        <div
-          ref={this.skinviewRef}
-          className="playerSkinCanvasParent shadow"
-          style={{ cursor: "move" }}
-        />
+        <canvas ref={this.skinviewRef} className="playerSkinCanvasParent shadow" style={{ cursor: "move" }} />
       </Fragment>
     );
   }
