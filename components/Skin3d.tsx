@@ -1,5 +1,7 @@
 import { Component, RefObject, createRef, Fragment } from "react";
-import { SkinViewer, WalkingAnimation, createOrbitControls } from "../libs/skinview3d";
+import { SkinViewer } from "../libs/skinview3d/viewer";
+import { WalkingAnimation } from "../libs/skinview3d/animation";
+import { createOrbitControls } from "../libs/skinview3d/orbit_controls";
 import { v4 as uuid } from "uuid";
 
 type Props = {
