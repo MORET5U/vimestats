@@ -9,6 +9,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@types/three": "^0.103.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.21.0",
@@ -16,6 +17,7 @@
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "three": "^0.121.1",
     "uuid": "^8.3.1",
     "vime-types": "^0.1.3"
   },
