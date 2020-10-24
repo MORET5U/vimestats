@@ -38,7 +38,6 @@ interface ISearchFieldProps {
 
 function CustomizedInputBase({
   placeholder = "",
-  label = "",
   clickAction,
   inputAction,
   submitAction,

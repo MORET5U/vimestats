@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import { useRouter } from "next/router";
 import { Container, Box } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { MySweetAlert } from "../components/MySweetalert";
+import { MySweetAlert } from "../components/MySweetAlert";
 
 const IndexPage: NextPage = () => {
   const initialState = { query: "" };

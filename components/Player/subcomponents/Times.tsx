@@ -17,16 +17,14 @@ const lastSeen = (timestamp: number): string | React.ReactElement => {
   let min = "0" + date.getMinutes();
   let sec = "0" + date.getSeconds();
 
-  if (now.getDate() === date.getDate())
-    return `сегодня в ${hour.substr(-2)}:${min.substr(-2)}`;
+  if (now.getDate() === date.getDate()) return `сегодня в ${hour.substr(-2)}:${min.substr(-2)}`;
 
   return (
     <span>
       <Tooltip
         title={
           <span className="tooltipModified">
-            {day.substr(-2)}.{month.substr(-2)}.{year} в {hour.substr(-2)}:
-            {min.substr(-2)}:{sec.substr(-2)}
+            {day.substr(-2)}.{month.substr(-2)}.{year} в {hour.substr(-2)}:{min.substr(-2)}:{sec.substr(-2)}
           </span>
         }
         arrow
@@ -63,10 +61,14 @@ const Times: FunctionComponent<Props> = ({ user, session }) => {
           <Box mt={1}>
             <Typography variant="body1">
               <strong>Проведено в игре:</strong>{" "}
-              {user.playedHours < 1 ? (
-                <span>{Math.round(user.playedMinutes)} мин.</span>
-              ) : (
-                <span>{Math.round(user.playedHours)} ч.</span>
+              {user.playedHours && (
+                <>
+                  {user?.playedHours < 1 ? (
+                    <span>{Math.round(user.playedMinutes!)} мин.</span>
+                  ) : (
+                    <span>{Math.round(user.playedHours)} ч.</span>
+                  )}
+                </>
               )}
             </Typography>
             <Typography variant="body1">
@@ -77,13 +79,7 @@ const Times: FunctionComponent<Props> = ({ user, session }) => {
                 </span>
               ) : (
                 <span>
-                  <Tooltip
-                    title="Онлайн"
-                    arrow
-                    disableFocusListener
-                    disableTouchListener
-                    placement="top"
-                  >
+                  <Tooltip title="Онлайн" arrow disableFocusListener disableTouchListener placement="top">
                     <LensRoundedIcon className="onlineIcon" />
                   </Tooltip>{" "}
                   {session.message}
