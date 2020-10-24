@@ -1,6 +1,18 @@
 import { IGuildSimple } from "vime-types/models/Guild";
 import { IUserStatsGroup } from "vime-types/models/Stats";
-import { IUser, IUserMatch, IUserSession } from "vime-types/models/User";
+import {
+  IUser,
+  IUserGuild,
+  IUserMatch,
+  IUserSession,
+} from "vime-types/models/User";
+
+export interface baseUser {
+  user: IModifiedUser;
+  session: IUserSession;
+  guild: IUserGuild;
+  friends: IModifiedUser[];
+}
 
 export type UserData = {
   user?: IModifiedUser;
