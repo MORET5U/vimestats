@@ -1,11 +1,15 @@
 import { IGuildSimple } from "vime-types/models/Guild";
 import { IUserStatsGroup } from "vime-types/models/Stats";
-import {
-  IUser,
-  IUserGuild,
-  IUserMatch,
-  IUserSession,
-} from "vime-types/models/User";
+import { IUser, IUserGuild, IUserMatch, IUserSession } from "vime-types/models/User";
+
+export type FlagsBooleans = {
+  isDeveloper: boolean;
+  isVimeAdmin: boolean;
+  isProjectSupporter: boolean;
+  isContributor: boolean;
+  isGoodModerator: boolean;
+  isBanHammer3000: boolean;
+};
 
 export interface baseUser {
   user: IModifiedUser;
@@ -37,13 +41,19 @@ export interface IFlagsBooleans {
   isBanHammer3000?: boolean;
 }
 
-export interface IModifiedUser extends IUser {
-  humanizedRank: string;
-  rankColor: string;
-  playedHours: number;
-  playedMinutes: number;
-  skinHelm: string;
-  flags: IFlags;
+export type Flags = {
+  raw?: number;
+  processed?: FlagsBooleans | {};
+};
+
+export interface IModifiedUser extends Omit<IUser, "guild"> {
+  guild?: IUserGuild | null;
+  humanizedRank?: string;
+  rankColor?: string;
+  playedHours?: number;
+  playedMinutes?: number;
+  skinHelm?: string;
+  flags?: Flags;
 }
 
 export interface IOnlineModer extends IModifiedUser {
@@ -91,3 +101,9 @@ export interface IPostsArticles {
   count: number;
   items: IPostArticle[];
 }
+
+export type StatusRow = {
+  id: number;
+  username: string;
+  status_text: string;
+};
