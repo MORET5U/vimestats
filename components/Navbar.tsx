@@ -23,7 +23,7 @@ import SecurityRoundedIcon from "@material-ui/icons/SecurityRounded";
 import ExposureNeg1RoundedIcon from "@material-ui/icons/ExposureNeg1Rounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import ThemeCtx from "./Theme";
-import { MySweetAlert } from "./MySweetalert";
+import { MySweetAlert } from "./MySweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,13 +99,10 @@ const Navbar: FunctionComponent = () => {
   const inputRef = createRef<HTMLInputElement>();
 
   type DrawerSide = "top" | "left" | "bottom" | "right";
-  const toggleDrawer = (side: DrawerSide, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
+  const toggleDrawer = (side: DrawerSide, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" ||
-        (event as React.KeyboardEvent).key === "Shift")
+      ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")
     ) {
       return;
     }
@@ -114,11 +111,7 @@ const Navbar: FunctionComponent = () => {
   };
 
   const sideList = (side: DrawerSide) => (
-    <div
-      className={classes.list}
-      role="presentation"
-      onKeyDown={toggleDrawer(side, false)}
-    >
+    <div className={classes.list} role="presentation" onKeyDown={toggleDrawer(side, false)}>
       <List>
         <Link href="/">
           <a className={classes.drawerLinkItem}>
@@ -181,11 +174,7 @@ const Navbar: FunctionComponent = () => {
             return (
               <ListItem button onClick={switchTheme}>
                 <ListItemIcon>
-                  <Switch
-                    size="small"
-                    checked={themeState.isDark ? true : false}
-                    color="primary"
-                  />
+                  <Switch size="small" checked={themeState.isDark ? true : false} color="primary" />
                 </ListItemIcon>
                 <ListItemText primary="Тёмная тема"></ListItemText>
               </ListItem>
@@ -196,8 +185,7 @@ const Navbar: FunctionComponent = () => {
     </div>
   );
 
-  const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setQuery(e.target.value.trim());
+  const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value.trim());
 
   const handleQuery = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -220,20 +208,11 @@ const Navbar: FunctionComponent = () => {
     <div className={classes.root}>
       <AppBar position="static" color="transparent" elevation={2}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer("left", true)}
-          >
+          <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={toggleDrawer("left", true)}>
             <MenuIcon />
           </IconButton>
 
-          <Drawer
-            open={state.left}
-            onClose={toggleDrawer("left", false)}
-            anchor="left"
-          >
+          <Drawer open={state.left} onClose={toggleDrawer("left", false)} anchor="left">
             {sideList("left")}
           </Drawer>
 
