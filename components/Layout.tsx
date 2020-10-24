@@ -1,41 +1,46 @@
-import React, { ReactNode } from "react";
-import Link from "next/link";
+import React, { Fragment } from "react";
 import Head from "next/head";
+import Navbar from "./Navbar";
 
 type Props = {
-  children?: ReactNode;
   title?: string;
+  description?: string;
+  iconURL?: string;
+  color?: string;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <header>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{" "}
-        |{" "}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{" "}
-        |{" "}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{" "}
-        | <a href="/api/users">Users API</a>
-      </nav>
-    </header>
-    {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
-  </div>
-);
+const Layout: React.FunctionComponent<Props> = ({
+  children,
+  title = "VimeStats | Статистика игроков VimeWorld",
+  description = "Веб-приложение для отслеживания статистики игроков Minecraft проекта VimeWorld",
+  color = "#bb86fc",
+  iconURL,
+}) => {
+  return (
+    <Fragment>
+      <Head>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        {description && <meta name="description" content={description} />}
+        <meta name="keywords" content="VimeStats,VimeWorld" />
+        <meta name="author" content="runic-tears" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="theme-color" content={color} />
+
+        <meta property="og:title" content={title} />
+        {description && (
+          <meta property="og:description" content={description} />
+        )}
+        {iconURL && <meta property="og:image" content={iconURL} />}
+      </Head>
+
+      <Fragment>
+        <Navbar />
+        {children}
+      </Fragment>
+    </Fragment>
+  );
+};
 
 export default Layout;
