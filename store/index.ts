@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, AnyAction, combineReducers, Middleware } from "redux";
-import { HYDRATE, createWrapper, MakeStore } from "next-redux-wrapper";
+import { HYDRATE, createWrapper, MakeStore, Context } from "next-redux-wrapper";
 import thunkMiddleware from "redux-thunk";
 import player, { playerState } from "./player/reducer";
 import error, { errorState } from "./error/reducer";
@@ -40,8 +40,10 @@ const reducer = (state = storeState, action: AnyAction) => {
   }
 };
 
-const makeStore: MakeStore<IStoreState> = () => {
+// create a makeStore function
+const makeStore: MakeStore<IStoreState> = (context: Context) => {
   return createStore(reducer, bindMiddleware([thunkMiddleware]));
 };
 
+// export an assembled wrapper
 export const wrapper = createWrapper<IStoreState>(makeStore);
