@@ -11,19 +11,15 @@ export const actionTypes = {
 export const fetchPlayer = (username: string, failureCallback = () => {}) => async (dispatch: Dispatch) => {
   dispatch({ type: actionTypes.FETCH_PLAYER });
 
-  await Axios({
-    url: `/api/player/${username}`,
-    withCredentials: true,
-  })
-    .then((response) => {
-      return response.data;
-    })
-    .then((data) => {
-      dispatch({ type: actionTypes.FETCH_PLAYER_SUCCESS, payload: data });
-    })
-    .catch((err) => {
-      failureCallback();
-      addPlayerError(err)(dispatch);
-      dispatch({ type: actionTypes.FETCH_PLAYER_FAILURE });
-    });
+  try {
+    const response = await Axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/player/${username}`);
+    const data = response.data;
+
+    return dispatch({ type: actionTypes.FETCH_PLAYER_SUCCESS, payload: data });
+  } catch (err) {
+    failureCallback();
+    addPlayerError(err)(dispatch);
+    
+    return dispatch({ type: actionTypes.FETCH_PLAYER_FAILURE });
+  }
 };
