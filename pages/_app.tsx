@@ -1,7 +1,7 @@
 import { Fragment, FC, useEffect, useState } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import ThemeCtx, { betterLight } from "../components/Theme";
+import ThemeCtx, { betterLight, darkTheme } from "../components/Theme";
 import ProgressBar from "../components/ProgressBar";
 import { AppProps } from "next/app";
 import { wrapper } from "../store";
@@ -51,11 +51,11 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
           switchTheme: switchTheme,
         }}
       >
-        <ThemeProvider theme={currentTheme.isDark ? betterLight : betterLight}>
+        <ThemeProvider theme={currentTheme.isDark ? darkTheme : betterLight}>
           <ProgressBar
             height={6}
             options={{ showSpinner: true }}
-            color={currentTheme.isDark ? betterLight.palette.primary.main : "#000000"}
+            color={currentTheme.isDark ? darkTheme.palette.primary.main : "#000000"}
           />
           <CssBaseline />
           <Component {...pageProps} />
