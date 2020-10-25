@@ -4,7 +4,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import ThemeCtx, { betterLight, darkTheme } from "../components/Theme";
 import ProgressBar from "../components/ProgressBar";
 import { AppProps } from "next/app";
-import { wrapper } from "../store";
 
 import "../styles/main.scss";
 import "../styles/badges.scss";
@@ -65,4 +64,4 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   );
 };
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;
