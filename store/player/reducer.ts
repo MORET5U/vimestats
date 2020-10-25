@@ -1,8 +1,8 @@
-import { IModifiedUser } from "interfaces";
+import { UserData } from "interfaces";
 import { AnyAction } from "redux";
 import { actionTypes } from "./action";
 
-export const playerState: IModifiedUser | null = null;
+export const playerState: UserData | null = null;
 
 const reducer = (state = playerState, action: AnyAction) => {
   switch (action.type) {
