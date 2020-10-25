@@ -1,9 +1,10 @@
-import { Fragment } from "react";
-import App from "next/app";
+import { Fragment, FC, useEffect, useState } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ThemeCtx, { betterLight } from "../components/Theme";
 import ProgressBar from "../components/ProgressBar";
+import { AppProps } from "next/app";
+import { wrapper } from "../store";
 
 import "../styles/main.scss";
 import "../styles/badges.scss";
@@ -11,81 +12,57 @@ import "../styles/darkscroller.scss";
 import "../styles/demotions.scss";
 import "../styles/player.scss";
 
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
-// TODO: FIX DARK THEME
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+  const [currentTheme, setTheme] = useState({ isDark: false });
 
-export default class MyApp extends App {
-  public state = { isDark: false };
-
-  public setDark = () => {
+  const setDark = () => {
     localStorage.setItem("color-theme", "dark");
-    this.setState({ isDark: true });
+    setTheme({ isDark: true });
   };
 
-  public setLight = () => {
+  const setLight = () => {
     localStorage.setItem("color-theme", "light");
-    this.setState({ isDark: false });
+    setTheme({ isDark: false });
   };
 
-  public switchTheme = () => {
+  const switchTheme = () => {
     if (localStorage.getItem("color-theme")?.toLowerCase() === "dark") {
-      this.setLight();
+      setLight();
     } else {
-      this.setDark();
+      setDark();
     }
   };
 
-  public componentDidMount() {
-    const selectedTheme =
-      localStorage.getItem("color-theme")?.toLowerCase() || undefined;
-    if (selectedTheme === "dark") {
-      this.setState({ isDark: true });
-    }
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement!.removeChild(jssStyles);
     }
-  }
+  }, []);
 
-  public render() {
-    const { Component, pageProps } = this.props;
+  return (
+    <Fragment>
+      <ThemeCtx.Provider
+        value={{
+          themeState: currentTheme,
+          setDark: setDark,
+          setLight: setLight,
+          switchTheme: switchTheme,
+        }}
+      >
+        <ThemeProvider theme={currentTheme.isDark ? betterLight : betterLight}>
+          <ProgressBar
+            height={6}
+            options={{ showSpinner: true }}
+            color={currentTheme.isDark ? betterLight.palette.primary.main : "#000000"}
+          />
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ThemeCtx.Provider>
+    </Fragment>
+  );
+};
 
-    return (
-      <Fragment>
-        <ThemeCtx.Provider
-          value={{
-            themeState: this.state,
-            setDark: this.setDark,
-            setLight: this.setLight,
-            switchTheme: this.switchTheme,
-          }}
-        >
-          <ThemeProvider theme={this.state.isDark ? betterLight : betterLight}>
-            <ProgressBar
-              height={6}
-              options={{ showSpinner: true }}
-              color={
-                this.state.isDark ? betterLight.palette.primary.main : "#000000"
-              }
-            />
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </ThemeCtx.Provider>
-      </Fragment>
-    );
-  }
-}
+export default wrapper.withRedux(MyApp);
