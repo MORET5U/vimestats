@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -40,25 +40,25 @@ const useStyles = makeStyles({
 const Friends: FunctionComponent<Props> = ({ friends, user }) => {
   let rows: IRows[] = [];
 
-  if (friends)
-    friends = friends.sort((a, b) =>
-      a.username.toLowerCase().localeCompare(b.username.toLowerCase())
-    );
+  if (friends) friends = friends.sort((a, b) => a.username.toLowerCase().localeCompare(b.username.toLowerCase()));
 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleChangePage = (
-    _: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  const resetPages = useCallback(() => {
+    setPage((_) => 0);
+  }, [setPage]);
+
+  useEffect(() => {
+    resetPages();
+  }, [user?.username]);
+
+  const handleChangePage = (_: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -66,11 +66,7 @@ const Friends: FunctionComponent<Props> = ({ friends, user }) => {
   if (!friends)
     return (
       <Paper variant="outlined">
-        <Typography
-          variant="h5"
-          align="center"
-          style={{ paddingTop: "2%", paddingBottom: "2%" }}
-        >
+        <Typography variant="h5" align="center" style={{ paddingTop: "2%", paddingBottom: "2%" }}>
           <span role="img" aria-label="sweat emoji">
             😰
           </span>{" "}
@@ -79,19 +75,12 @@ const Friends: FunctionComponent<Props> = ({ friends, user }) => {
       </Paper>
     );
 
-  friends!.map((friend) => {
+  friends!.forEach((friend) => {
     rows = [
       ...rows,
       createData(
-        <Link
-          href="/player/[name]"
-          as={"/player/" + friend.username}
-          prefetch={false}
-        >
-          <a
-            className="minecraftFont friendName"
-            style={{ color: friend["rankColor"], cursor: "pointer" }}
-          >
+        <Link href="/player/[name]" as={"/player/" + friend.username} prefetch={false}>
+          <a className="minecraftFont friendName" style={{ color: friend["rankColor"], cursor: "pointer" }}>
             {friend.username}
           </a>
         </Link>,
@@ -108,10 +97,7 @@ const Friends: FunctionComponent<Props> = ({ friends, user }) => {
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  style={{ minWidth: column.minWidth }}
-                >
+                <TableCell key={column.id} style={{ minWidth: column.minWidth }}>
                   <span style={{ fontSize: "1rem" }}>{column.label}</span>
                 </TableCell>
               ))}
@@ -119,19 +105,17 @@ const Friends: FunctionComponent<Props> = ({ friends, user }) => {
           </TableHead>
 
           <TableBody className="friends-table">
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      const value = row.element;
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              return (
+                <TableRow hover tabIndex={-1} key={row.id}>
+                  {columns.map((column) => {
+                    const value = row.element;
 
-                      return <TableCell key={column.id}>{value}</TableCell>;
-                    })}
-                  </TableRow>
-                );
-              })}
+                    return <TableCell key={column.id}>{value}</TableCell>;
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
