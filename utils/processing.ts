@@ -89,6 +89,7 @@ export class Processors {
     processed.playedMinutes = player.playedSeconds / 60;
     processed.levelPercentage = player.levelPercentage * 100;
     processed.skinHelm = `https://skin.vimeworld.ru/helm/${player.username}.png?request=${uuid()}`;
+    processed.skinHelm3D = `https://skin.vimeworld.ru/helm/3d/${player.username}.png?request=${uuid()}`;
 
     return processed;
   };

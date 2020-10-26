@@ -29,7 +29,7 @@ const General: FunctionComponent<Props> = ({ user, guild }) => {
       <Fragment>
         <Grid container spacing={1}>
           <Grid item>
-            <Avatar variant="rounded" src={user.skinHelm} className={classes.avatar} />
+            <Avatar variant="rounded" src={user.skinHelm3D} className={classes.avatar} />
           </Grid>
 
           <Grid item xs sm>
