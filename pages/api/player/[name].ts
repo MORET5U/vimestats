@@ -3,7 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { IUser, IUserFriendsRaw, IUserSessionRaw, IUserStatsRaw } from "vime-types/models/User";
 import { IError } from "vime-types/models/Errors";
 import Validator from "../../../utils/validation";
-import { UserModified } from "utils/user";
+import { Processors } from "utils/processing";
+import { IModifiedUser } from "interfaces";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -40,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // We process the data
-    const processedUser = new UserModified(user);
+    const processedUser = await Processors.user(user, { noGuild: true });
 
     // Separate guild object from user data
     const guild = user.guild;
@@ -65,13 +66,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         throw err;
       });
 
+    let friendsProcessed: IModifiedUser[] | null = [];
     if (friends.length > 0) {
       for (let i = 0; i < friends.length; i++) {
         let friend = friends[i];
-        friends[i] = { ...new UserModified(friend), guild: friend.guild };
+        friendsProcessed[i] = await Processors.user(friend);
       }
     } else {
-      friends = null;
+      friendsProcessed = null;
     }
 
     // Time to get stats
@@ -88,7 +90,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       user: processedUser,
       guild: guild,
       session: session,
-      friends: friends,
+      friends: friendsProcessed,
       stats: stats,
     };
 

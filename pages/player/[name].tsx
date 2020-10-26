@@ -6,7 +6,6 @@ import PlayerRenderer from "../../components/Player/PlayerRenderer";
 import Axios, { AxiosError } from "axios";
 import UnknownPlayer from "../../components/Player/UnknownPlayer";
 import BadQuery from "../../components/Player/BadQuery";
-import { UserModified } from "utils/user";
 
 type Props = {
   data?: UserData;
@@ -42,7 +41,7 @@ PlayerPage.getInitialProps = async ({ query }: NextPageContext) => {
   try {
     const apiReq = await Axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/player/${name?.toString()}`);
     const data = apiReq.data;
-    return { data: { ...data, user: new UserModified(data.user) } };
+    return { data };
   } catch (e) {
     let err: AxiosError = e;
 
