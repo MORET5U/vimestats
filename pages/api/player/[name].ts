@@ -2,8 +2,8 @@ import Axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import { IUser, IUserFriendsRaw, IUserSessionRaw, IUserStatsRaw } from "vime-types/models/User";
 import { IError } from "vime-types/models/Errors";
-import { Processors } from "../../../utils/processing";
 import Validator from "../../../utils/validation";
+import { UserModified } from "utils/user";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -12,10 +12,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     } = req;
 
     // We should test the username first
-    const isUsernmaeValid = Validator.validateUsername(<string>name);
+    const isUsernameValid = Validator.validateUsername(<string>name);
 
     // In case of invalid username we throw 400 HTTP with JSON
-    if (!isUsernmaeValid) {
+    if (!isUsernameValid) {
       res.status(400).json({
         error: { message: "Invalid playername requested", code: 400 },
       });
@@ -40,12 +40,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // We process the data
-    // MUTATION
-    const processedUser = await Processors.player(user);
+    const processedUser = new UserModified(user);
 
     // Separate guild object from user data
-    const guild = processedUser.guild;
-    processedUser.guild = undefined;
+    const guild = user.guild;
 
     // Proceed to gettting session data
     const session = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/session`, {
@@ -70,7 +68,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (friends.length > 0) {
       for (let i = 0; i < friends.length; i++) {
         let friend = friends[i];
-        await Processors.player(friend);
+        friends[i] = { ...new UserModified(friend), guild: friend.guild };
       }
     } else {
       friends = null;
