@@ -20,7 +20,7 @@ export interface baseUser {
 }
 
 export type UserData = {
-  user?: UserModified;
+  user?: IModifiedUser;
   guild?: IGuildSimple;
   session?: IUserSession;
   matches?: IUserMatch[];
