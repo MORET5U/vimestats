@@ -34,7 +34,6 @@ export interface IFlagsBooleans {
   isProjectSupporter?: boolean;
   isContributor?: boolean;
   isGoodModerator?: boolean;
-  isBanHammer3000?: boolean;
 }
 
 export interface IModifiedUser extends Omit<IUser, "guild"> {
