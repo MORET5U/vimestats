@@ -1,6 +1,7 @@
 import { IUser } from "vime-types/models/User";
 import { IModifiedUser, FlagsBooleans } from "../interfaces";
 import { v4 as uuid } from "uuid";
+import badgesData from "./badgesValues.json";
 
 export class Processors {
   /** Processes RAW user flag into an object of booleans
@@ -84,6 +85,8 @@ export class Processors {
         processed.rankColor = undefined;
         break;
     }
+
+    processed.flags = Object.getOwnPropertyDescriptor(badgesData, `${processed.username}`)?.value || 0;
 
     processed.playedHours = player.playedSeconds / 3600;
     processed.playedMinutes = player.playedSeconds / 60;
