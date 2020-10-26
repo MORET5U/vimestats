@@ -53,6 +53,7 @@ export interface IModifiedUser extends Omit<IUser, "guild"> {
   playedHours?: number;
   playedMinutes?: number;
   skinHelm?: string;
+  skinHelm3D?: string;
   flags?: Flags;
 }
 
