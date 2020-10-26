@@ -1,4 +1,3 @@
-import { UserModified } from "utils/user";
 import { IGuildSimple } from "vime-types/models/Guild";
 import { IUserStatsGroup } from "vime-types/models/Stats";
 import { IUser, IUserGuild, IUserMatch, IUserSession } from "vime-types/models/User";
