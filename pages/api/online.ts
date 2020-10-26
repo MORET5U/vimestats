@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         resultingData = await Axios.get(`${process.env.VIME_API_URI}/online/staff`)
           .then((r) => r.data)
           .then((receivedData) => {
-            receivedData.map(async (moderator: IUser) => await Processors.player(moderator));
+            receivedData.map(async (moderator: IUser) => await Processors.user(moderator));
             return receivedData;
           });
         break;

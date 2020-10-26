@@ -1,16 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, FC } from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
-import GavelRoundedIcon from "@material-ui/icons/GavelRounded";
 import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
 import MemoryRoundedIcon from "@material-ui/icons/MemoryRounded";
-import { IFlagsBooleans } from "../interfaces";
 
-const Badges = ({ flags }: { flags: IFlagsBooleans }) => {
+type Props = {
+  flags: number;
+};
+
+const Badges: FC<Props> = ({ flags }) => {
   return (
     <Fragment>
-      {flags.isVimeAdmin && (
+      {(flags & 0x02) === 0x02 && (
         <Tooltip
           disableFocusListener
           disableTouchListener
@@ -21,7 +23,7 @@ const Badges = ({ flags }: { flags: IFlagsBooleans }) => {
         </Tooltip>
       )}
 
-      {flags.isDeveloper && (
+      {(flags & 0x01) === 0x01 && (
         <Tooltip
           disableFocusListener
           disableTouchListener
@@ -32,7 +34,7 @@ const Badges = ({ flags }: { flags: IFlagsBooleans }) => {
         </Tooltip>
       )}
 
-      {flags.isProjectSupporter && (
+      {(flags & 0x04) === 0x04 && (
         <Tooltip
           disableFocusListener
           disableTouchListener
@@ -43,7 +45,7 @@ const Badges = ({ flags }: { flags: IFlagsBooleans }) => {
         </Tooltip>
       )}
 
-      {flags.isGoodModerator && (
+      {(flags & 0x10) === 0x10 && (
         <Tooltip
           disableFocusListener
           disableTouchListener
@@ -51,17 +53,6 @@ const Badges = ({ flags }: { flags: IFlagsBooleans }) => {
           placement="top"
         >
           <DoneOutlineRoundedIcon className="playerBadge goodModeratorBadge" />
-        </Tooltip>
-      )}
-
-      {flags.isBanHammer3000 && (
-        <Tooltip
-          disableFocusListener
-          disableTouchListener
-          title={<span className="badgeTooltip">БАНХАММЕР 3000</span>}
-          placement="top"
-        >
-          <GavelRoundedIcon className="playerBadge banHammer3000" />
         </Tooltip>
       )}
     </Fragment>

@@ -18,7 +18,7 @@ import TNTRun from "./Panels/TNTRun";
 import JumpLeague from "./Panels/JumpLeague";
 import BlockParty from "./Panels/BlockPaty";
 import MurderMystery from "./Panels/MurderMystery";
-import StatsCard from "./StatsCard";
+import StatsAccordion from "./StatsAccordion";
 import TNTTag from "./Panels/TNTTag";
 
 type StatsProps = {
@@ -29,98 +29,83 @@ const Stats: FunctionComponent<StatsProps> = ({ stats }) => {
   return (
     <Grid container direction="column" spacing={1}>
       <Grid item>
-        <StatsCard title="Annihilation">
+        <StatsAccordion title="Annihilation">
           <Annihilation global={stats.ANN.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Bed Wars">
+        </StatsAccordion>
+
+        <StatsAccordion title="Bed Wars">
           <BedWars global={stats.BW.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Block Party">
+        </StatsAccordion>
+
+        <StatsAccordion title="Block Party">
           <BlockParty global={stats.BP.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Build Battle">
+        </StatsAccordion>
+
+        <StatsAccordion title="Build Battle">
           <BuildBattle global={stats.BB.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Clash Point">
+        </StatsAccordion>
+
+        <StatsAccordion title="Clash Point">
           <ClashPoint global={stats.CP.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Death Run">
+        </StatsAccordion>
+
+        <StatsAccordion title="Death Run">
           <DeathRun global={stats.DR.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Duels">
+        </StatsAccordion>
+
+        <StatsAccordion title="Duels">
           <Duels global={stats.DUELS.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Gun Game">
+        </StatsAccordion>
+
+        <StatsAccordion title="Gun Game">
           <GunGame global={stats.GG.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Hunger Games">
+        </StatsAccordion>
+
+        <StatsAccordion title="Hunger Games">
           <HungerGames global={stats.HG.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Jump League">
+        </StatsAccordion>
+
+        <StatsAccordion title="Jump League">
           <JumpLeague global={stats.JUMPLEAGUE.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="KitPVP">
+        </StatsAccordion>
+
+        <StatsAccordion title="KitPVP">
           <KitPVP global={stats.KPVP.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Lucky Wars">
+        </StatsAccordion>
+
+        <StatsAccordion title="Lucky Wars">
           <LuckyWars global={stats.LUCKYWARS.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="MobWars">
+        </StatsAccordion>
+
+        <StatsAccordion title="MobWars">
           <MobWars global={stats.MW.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="Murder Mystery">
+        </StatsAccordion>
+
+        <StatsAccordion title="Murder Mystery">
           <MurderMystery global={stats.MURDER.global} />
-        </StatsCard>
-      </Grid>
-      {/** Paintball **/}
-      {/** Prison **/}
-      {/** Sheep Wars **/}
-      <Grid item>
-        <StatsCard title="Sky Wars">
+        </StatsAccordion>
+
+        {/** Paintball **/}
+        {/** Prison **/}
+        {/** Sheep Wars **/}
+
+        <StatsAccordion title="Sky Wars">
           <SkyWars global={stats.SW.global} />
-        </StatsCard>
-      </Grid>
-      {/** Spleef **/}
-      <Grid item>
-        <StatsCard title="TNT Run">
+        </StatsAccordion>
+
+        {/** Spleef **/}
+
+        <StatsAccordion title="TNT Run">
           <TNTRun global={stats.TNTRUN.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="TNT Tag">
+        </StatsAccordion>
+
+        <StatsAccordion title="TNT Tag">
           <TNTTag global={stats.TNTTAG.global} />
-        </StatsCard>
-      </Grid>
-      <Grid item>
-        <StatsCard title="The Bridge">
+        </StatsAccordion>
+
+        <StatsAccordion title="The Bridge">
           <TheBridge global={stats.BRIDGE.global} />
-        </StatsCard>
+        </StatsAccordion>
       </Grid>
       {/** Turf Wars **/}
       {/** Аркады **/}

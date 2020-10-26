@@ -27,24 +27,13 @@ export type UserData = {
   stats?: IUserStatsGroup;
 };
 
-export interface IFlags {
-  raw: number;
-  processed: IFlagsBooleans | {};
-}
-
 export interface IFlagsBooleans {
   isDeveloper?: boolean;
   isVimeAdmin?: boolean;
   isProjectSupporter?: boolean;
   isContributor?: boolean;
   isGoodModerator?: boolean;
-  isBanHammer3000?: boolean;
 }
-
-export type Flags = {
-  raw?: number;
-  processed?: FlagsBooleans | {};
-};
 
 export interface IModifiedUser extends Omit<IUser, "guild"> {
   guild?: IUserGuild | null;
@@ -53,7 +42,8 @@ export interface IModifiedUser extends Omit<IUser, "guild"> {
   playedHours?: number;
   playedMinutes?: number;
   skinHelm?: string;
-  flags?: Flags;
+  skinHelm3D?: string;
+  flags?: number;
 }
 
 export interface IOnlineModer extends IModifiedUser {

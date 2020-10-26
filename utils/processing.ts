@@ -1,6 +1,11 @@
 import { IUser } from "vime-types/models/User";
 import { IModifiedUser, FlagsBooleans } from "../interfaces";
 import { v4 as uuid } from "uuid";
+import badgesData from "./badgesValues.json";
+
+const userProcessorDefaultOptions = {
+  noGuild: false,
+};
 
 export class Processors {
   /** Processes RAW user flag into an object of booleans
@@ -18,78 +23,85 @@ export class Processors {
 
   /** Processes user object
    *
-   * @param player - a user object
+   * @param user - a user object
    */
-  public static player = async (player: IUser): Promise<IModifiedUser> => {
-    const processed: IModifiedUser = player;
+  public static user = async (user: IUser, { noGuild } = userProcessorDefaultOptions): Promise<IModifiedUser> => {
+    const newUser: IModifiedUser = { ...user };
 
-    switch (player.rank) {
+    if (noGuild) {
+      delete newUser.guild;
+    }
+
+    switch (user.rank) {
       case "ADMIN":
-        processed.humanizedRank = "Гл. Админ";
-        processed.rankColor = "#00bebe";
+        newUser.humanizedRank = "Гл. Админ";
+        newUser.rankColor = "#00bebe";
         break;
       case "DEV":
-        processed.humanizedRank = "Разработчик";
-        processed.rankColor = "#00bebe";
+        newUser.humanizedRank = "Разработчик";
+        newUser.rankColor = "#00bebe";
         break;
       case "ORGANIZER":
-        processed.humanizedRank = "Организатор";
-        processed.rankColor = "#00bebe";
+        newUser.humanizedRank = "Организатор";
+        newUser.rankColor = "#00bebe";
         break;
       case "CHIEF":
-        processed.humanizedRank = "Гл. Модер";
-        processed.rankColor = "#4777e6";
+        newUser.humanizedRank = "Гл. Модер";
+        newUser.rankColor = "#4777e6";
         break;
       case "WARDEN":
-        processed.humanizedRank = "Пр. Модер";
-        processed.rankColor = "#4777e6";
+        newUser.humanizedRank = "Пр. Модер";
+        newUser.rankColor = "#4777e6";
         break;
       case "MODER":
-        processed.humanizedRank = "Модер";
-        processed.rankColor = "#4777e6";
+        newUser.humanizedRank = "Модер";
+        newUser.rankColor = "#4777e6";
         break;
       case "MAPLEAD":
-        processed.humanizedRank = "Гл. Билдер";
-        processed.rankColor = "#009c00";
+        newUser.humanizedRank = "Гл. Билдер";
+        newUser.rankColor = "#009c00";
         break;
       case "BUILDER":
-        processed.humanizedRank = "Билдер";
-        processed.rankColor = "#009c00";
+        newUser.humanizedRank = "Билдер";
+        newUser.rankColor = "#009c00";
         break;
       case "YOUTUBE":
-        processed.humanizedRank = "YouTube";
-        processed.rankColor = "#fe3f3f";
+        newUser.humanizedRank = "YouTube";
+        newUser.rankColor = "#fe3f3f";
         break;
       case "IMMORTAL":
-        processed.humanizedRank = "Immortal";
-        processed.rankColor = "#e800d5";
+        newUser.humanizedRank = "Immortal";
+        newUser.rankColor = "#e800d5";
         break;
       case "HOLY":
-        processed.humanizedRank = "Holy";
-        processed.rankColor = "#ffba2d";
+        newUser.humanizedRank = "Holy";
+        newUser.rankColor = "#ffba2d";
         break;
 
       case "PREMIUM":
-        processed.humanizedRank = "Premium";
-        processed.rankColor = "#00dada";
+        newUser.humanizedRank = "Premium";
+        newUser.rankColor = "#00dada";
         break;
 
       case "VIP":
-        processed.humanizedRank = "VIP";
-        processed.rankColor = "#00be00";
+        newUser.humanizedRank = "VIP";
+        newUser.rankColor = "#00be00";
         break;
 
       default:
-        processed.humanizedRank = "Игрок";
-        processed.rankColor = undefined;
+        newUser.humanizedRank = "Игрок";
+        newUser.rankColor = undefined;
         break;
     }
 
-    processed.playedHours = player.playedSeconds / 3600;
-    processed.playedMinutes = player.playedSeconds / 60;
-    processed.levelPercentage = player.levelPercentage * 100;
-    processed.skinHelm = `https://skin.vimeworld.ru/helm/${player.username}.png?request=${uuid()}`;
+    newUser.flags = Object.getOwnPropertyDescriptor(badgesData, `${newUser.username}`)?.value || 0;
 
-    return processed;
+    newUser.playedHours = user.playedSeconds / 3600;
+    newUser.playedMinutes = user.playedSeconds / 60;
+    newUser.levelPercentage = user.levelPercentage * 100;
+    newUser.skinHelm = `https://skin.vimeworld.ru/helm/${user.username}.png?request=${uuid()}`;
+    newUser.skinHelm3D = `https://skin.vimeworld.ru/helm/3d/${user.username}.png?request=${uuid()}`;
+
+    return newUser;
   };
 }

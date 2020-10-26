@@ -40,6 +40,16 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("color-theme");
+
+    if (savedTheme === "dark") {
+      setDark();
+    } else {
+      setLight();
+    }
+  }, []);
+
   return (
     <Fragment>
       <ThemeCtx.Provider

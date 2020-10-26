@@ -26,7 +26,7 @@ const PlayerRenderer: React.FunctionComponent<Props> = ({ data }) => {
         user?.level
       }
       color={user?.rankColor || "transparent"}
-      iconURL={user?.skinHelm}
+      iconURL={user?.skinHelm3D}
     >
       <Container maxWidth="lg">
         <Box>

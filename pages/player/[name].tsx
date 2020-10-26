@@ -40,7 +40,8 @@ PlayerPage.getInitialProps = async ({ query }: NextPageContext) => {
 
   try {
     const apiReq = await Axios.get(`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/api/player/${name?.toString()}`);
-    return { data: apiReq.data };
+    const data = apiReq.data;
+    return { data };
   } catch (e) {
     let err: AxiosError = e;
 
