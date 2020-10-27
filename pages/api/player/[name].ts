@@ -4,7 +4,9 @@ import { IUser, IUserFriendsRaw, IUserSessionRaw, IUserStatsRaw } from "vime-typ
 import { IError } from "vime-types/models/Errors";
 import Validator from "../../../utils/validation";
 import { Processors } from "utils/processing";
-import { IModifiedUser } from "interfaces";
+import { IModifiedUser, UserData } from "interfaces";
+import { v4 as uuid } from "uuid";
+import { steveSkinURI } from "libs/skinview-utils";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -42,6 +44,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // We process the data
     const processedUser = await Processors.user(user, { noGuild: true });
+
+    // We should get user's skin as well as other data and include data URI
+    const skinDataURI = await Axios.get(`https://skin.vimeworld.ru/raw/skin/${user.username}.png?_=${uuid()}`, {
+      responseType: "arraybuffer",
+    })
+      .then((res) => Buffer.from(res.data, "binary").toString("base64"))
+      .then((b64) => `data:image/png;base64,${b64}`)
+      .catch((e: any) => {
+        if (e?.isAxiosError) {
+          return steveSkinURI;
+        } else {
+          throw e as Error;
+        }
+      });
 
     // Separate guild object from user data
     const guild = user.guild;
@@ -86,12 +102,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         throw err;
       });
 
-    const resultingData = {
+    const resultingData: UserData = {
       user: processedUser,
       guild: guild,
       session: session,
       friends: friendsProcessed,
       stats: stats,
+      skin: skinDataURI,
     };
 
     res.status(200).json(resultingData);
