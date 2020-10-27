@@ -1,8 +1,10 @@
 import Layout from "../../components/Layout";
 import { IOnlineModer } from "../../interfaces";
 import Axios, { AxiosError } from "axios";
-import OnlineStaffRenderer from "../../components/OnlineStaff/OnlineStaffRenderer";
 import { NextPage } from "next";
+import { Container } from "next/app";
+import { Grid } from "@material-ui/core";
+import StaffCard from "components/OnlineStaff/StaffCard";
 
 type Props = {
   data?: IOnlineModer[];
@@ -22,7 +24,21 @@ const StaffPage: NextPage<Props> = ({ data, errors }) => {
 
   return (
     <Layout title="Онлайн модеры | VimeStats" description="Список онлайн модераторов на VimeWorld MiniGames">
-      {data && <OnlineStaffRenderer data={data} />}
+      <Container maxWidth="lg">
+        {data !== undefined && data.length <= 0 && <p>Тишина...</p>}
+
+        {data !== undefined && data.length > 0 && (
+          <>
+            <Grid container spacing={2}>
+              {data.map((moder) => (
+                <Grid item xs={12} md={4} sm={12} key={moder.id}>
+                  <StaffCard data={moder} />
+                </Grid>
+              ))}
+            </Grid>
+          </>
+        )}
+      </Container>
     </Layout>
   );
 };
