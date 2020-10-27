@@ -1,31 +1,32 @@
-import { memo, Fragment, FunctionComponent } from "react";
+import { memo, Fragment, FC } from "react";
 import { Paper, Grid, Typography, Tooltip } from "@material-ui/core";
 import Link from "next/link";
 import LensRoundedIcon from "@material-ui/icons/LensRounded";
 import { IOnlineModer } from "../../interfaces";
 import { useStyles } from "./Styles";
+import Badges from "components/Badges";
 
 type Props = {
   data: IOnlineModer;
 };
 
-const StaffCard: FunctionComponent<Props> = ({ data }) => {
+const StaffCard: FC<Props> = ({ data: { username, skinHelm3D, online, flags, rankColor, humanizedRank } }) => {
   const classes = useStyles();
 
   return (
     <Fragment>
-      <Link href="/player/[name]" as={"/player/" + encodeURIComponent(data.username)}>
+      <Link href="/player/[name]" as={"/player/" + encodeURIComponent(username)}>
         <a className={classes.link}>
           <Paper className="gridItem" variant="outlined">
             <Grid container spacing={1}>
               <Grid item>
-                <img className="skinHelm" src={`${data.skinHelm}`} alt="Скин" width="64" />
+                <img className="skinHelm" src={`${skinHelm3D}`} alt="Скин" width="64" />
               </Grid>
 
               <Grid item xs sm>
                 <Typography variant="h5" className={classes.username}>
                   <Tooltip
-                    title={<span className={classes.tooltip}>{data.online.message}</span>}
+                    title={<span className={classes.tooltip}>{online.message}</span>}
                     arrow
                     disableFocusListener
                     disableTouchListener
@@ -33,10 +34,10 @@ const StaffCard: FunctionComponent<Props> = ({ data }) => {
                   >
                     <LensRoundedIcon className="onlineIcon" style={{ verticalAlign: "-0.2rem" }} />
                   </Tooltip>{" "}
-                  {data.username}
+                  {username}
                 </Typography>
-                <Typography variant="h5" style={{ color: data.rankColor }} className={classes.rank}>
-                  {data.humanizedRank}
+                <Typography variant="h5" style={{ color: rankColor }} className={classes.rank}>
+                  {flags !== undefined && flags > 0 && <Badges flags={flags} />} {humanizedRank}
                 </Typography>
               </Grid>
             </Grid>
