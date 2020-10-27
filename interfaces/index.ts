@@ -19,12 +19,14 @@ export interface baseUser {
 }
 
 export type UserData = {
-  user?: IModifiedUser;
-  guild?: IGuildSimple;
+  user: IModifiedUser;
+  guild?: IGuildSimple | null;
   session?: IUserSession;
+  /** @deprecated Not used anywhere */
   matches?: IUserMatch[];
-  friends?: IModifiedUser[];
+  friends?: IModifiedUser[] | null;
   stats?: IUserStatsGroup;
+  skin: string;
 };
 
 export interface IFlagsBooleans {
