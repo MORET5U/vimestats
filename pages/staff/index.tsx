@@ -2,8 +2,7 @@ import Layout from "../../components/Layout";
 import { IOnlineModer } from "../../interfaces";
 import Axios, { AxiosError } from "axios";
 import { NextPage } from "next";
-import { Container } from "next/app";
-import { Grid } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import StaffCard from "components/OnlineStaff/StaffCard";
 
 type Props = {
