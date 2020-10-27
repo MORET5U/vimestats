@@ -6,27 +6,19 @@ import { IUser } from "vime-types/models/User";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     let { sort } = req.query;
-    sort = sort || "total";
+    sort = sort.toString().toLowerCase() || "total";
 
-    let resultingData = {};
-    switch (sort.toString().toLowerCase()) {
-      case "total":
-        resultingData = await Axios.get(`${process.env.VIME_API_URI}/online`)
-          .then((r) => r.data)
-          .then((receivedData) => receivedData);
-        break;
+    let resultingData;
 
-      case "staff":
-        resultingData = await Axios.get(`${process.env.VIME_API_URI}/online/staff`)
-          .then((r) => r.data)
-          .then((receivedData) => {
-            receivedData.map(async (moderator: IUser) => await Processors.user(moderator));
-            return receivedData;
-          });
-        break;
+    if (sort === "total") {
+      let apiReq = await Axios.get(`${process.env.VIME_API_URI}/online`);
 
-      default:
-        break;
+      resultingData = await apiReq.data;
+    } else if (sort === "staff") {
+      let apiReq = await Axios.get(`${process.env.VIME_API_URI}/online/staff`);
+      let apiData: IUser[] = await apiReq.data;
+
+      resultingData = await Promise.all(apiData.map(async (u) => await Processors.user(u)));
     }
 
     res.status(200).json(resultingData);
