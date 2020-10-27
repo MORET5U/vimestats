@@ -6,7 +6,7 @@ import Badges from "components/Badges";
 
 type Props = {
   user: IModifiedUser;
-  guild: IGuildSimple;
+  guild: IGuildSimple | null;
 };
 
 const useStyles = makeStyles(() => ({

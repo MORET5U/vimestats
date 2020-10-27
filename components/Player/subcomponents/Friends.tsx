@@ -12,8 +12,8 @@ import { IModifiedUser } from "../../../interfaces";
 import Link from "next/link";
 
 type Props = {
-  friends?: IModifiedUser[];
-  user?: IModifiedUser;
+  friends: IModifiedUser[] | null;
+  user: IModifiedUser;
 };
 
 type IRows = {

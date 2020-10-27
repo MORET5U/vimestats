@@ -19,12 +19,7 @@ const PlayerRenderer: React.FunctionComponent<Props> = ({ data }) => {
   return (
     <Layout
       title={"[" + user?.humanizedRank + "] " + user?.username + " | VimeStats"}
-      description={
-        "Статистика игрока VimeWorld - " +
-        user?.username +
-        " | Уровень: " +
-        user?.level
-      }
+      description={"Статистика игрока VimeWorld - " + user?.username + " | Уровень: " + user?.level}
       color={user?.rankColor || "transparent"}
       iconURL={user?.skinHelm3D}
     >
@@ -36,7 +31,7 @@ const PlayerRenderer: React.FunctionComponent<Props> = ({ data }) => {
                 <Grid container spacing={1} direction="column">
                   <Grid item md xs={12} sm={12}>
                     <Paper className="gridItem" variant="outlined">
-                      <General user={user} guild={guild!} />
+                      <General user={user} guild={guild} />
                     </Paper>
                   </Grid>
 
@@ -67,7 +62,7 @@ const PlayerRenderer: React.FunctionComponent<Props> = ({ data }) => {
               <Grid item md={8} xs={12} sm={12}>
                 <Grid container direction="column">
                   <Grid item>
-                    <Stats stats={stats!} />
+                    <Stats stats={stats} />
                   </Grid>
                 </Grid>
               </Grid>
