@@ -51,28 +51,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     })
       .then((res) => Buffer.from(res.data, "binary").toString("base64"))
       .then((b64) => `data:image/png;base64,${b64}`)
-      .catch((e: any) => {
-        if (e?.isAxiosError) {
-          return steveSkinURI;
-        } else {
-          throw e as Error;
-        }
-      });
+      .catch((_e: any) => steveSkinURI);
 
-       // We should get user's skin as well as other data and include data URI
+    // We should get user's skin as well as other data and include data URI
     const capeDataURI = await Axios.get(`https://skin.vimeworld.ru/raw/cape/${user.username}.png?_=${uuid()}`, {
       responseType: "arraybuffer",
     })
       .then((res) => Buffer.from(res.data, "binary").toString("base64"))
       .then((b64) => `data:image/png;base64,${b64}`)
-      .catch((e: any) => {
-        if (e?.isAxiosError) {
-          return undefined;
-        } else {
-          throw e as Error;
-        }
-      });
-
+      .catch((_e: any) => undefined);
 
     // Separate guild object from user data
     const guild = user.guild;
@@ -124,7 +111,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       friends: friendsProcessed,
       stats: stats,
       skin: skinDataURI,
-      cape: capeDataURI
+      cape: capeDataURI,
     };
 
     res.status(200).json(resultingData);
