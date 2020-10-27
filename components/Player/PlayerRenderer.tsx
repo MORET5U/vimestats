@@ -14,7 +14,7 @@ type Props = {
 };
 
 const PlayerRenderer: React.FunctionComponent<Props> = ({ data }) => {
-  const { user, session, friends, guild, stats } = data;
+  const { user, session, friends, guild, stats, skin } = data;
 
   return (
     <Layout
@@ -49,7 +49,7 @@ const PlayerRenderer: React.FunctionComponent<Props> = ({ data }) => {
 
                   <Grid item md xs={12} sm={12}>
                     <Paper className="gridItem" variant="outlined">
-                      <Skin username={user.username} />
+                      <Skin username={user.username} skin={skin} />
                     </Paper>
                   </Grid>
 

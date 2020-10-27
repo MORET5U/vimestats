@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 
 type Props = {
   username: string;
+  skin: string;
   width?: number;
   height?: number;
   enableRotate?: boolean;
@@ -45,9 +46,9 @@ export default class Skin3d extends Component<Props> {
       },
       () => {
         const { viewer } = this.state;
-        const { enableRotate, enableZoom, enablePan, walkingSpeed } = this.props;
+        const { enableRotate, enableZoom, enablePan, walkingSpeed, skin } = this.props;
 
-        viewer!.loadSkin(`https://skin.vimeworld.ru/raw/skin/${this.props.username}.png?_=${this.state.reqID}`);
+        viewer!.loadSkin(skin);
         viewer!.loadCape(`https://skin.vimeworld.ru/raw/cape/${this.props.username}.png?_=${this.state.reqID}`);
 
         const walk = viewer!.animations.add(WalkingAnimation);

@@ -4,9 +4,10 @@ import Skin3d from "../../Skin3d";
 
 type Props = {
   username: string;
+  skin: string;
 };
 
-const Skin: FunctionComponent<Props> = ({ username }) => {
+const Skin: FunctionComponent<Props> = ({ username, skin }) => {
   return (
     <Fragment>
       <Box mb={1}>
@@ -17,19 +18,9 @@ const Skin: FunctionComponent<Props> = ({ username }) => {
 
       <Divider />
 
-      <Grid
-        container
-        alignContent="center"
-        alignItems="center"
-        justify="center"
-      >
+      <Grid container alignContent="center" alignItems="center" justify="center">
         <Grid item>
-          <Skin3d
-            username={username}
-            height={375}
-            enableZoom={false}
-            walkingSpeed={1}
-          />
+          <Skin3d skin={skin} username={username} height={375} enableZoom={false} walkingSpeed={1} />
         </Grid>
       </Grid>
     </Fragment>
