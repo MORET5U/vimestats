@@ -27,6 +27,7 @@ export type UserData = {
   friends: IModifiedUser[] | null;
   stats: IUserStatsGroup;
   skin: string;
+  cape?: string;
 };
 
 export interface IFlagsBooleans {
