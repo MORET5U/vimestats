@@ -20,12 +20,12 @@ export interface baseUser {
 
 export type UserData = {
   user: IModifiedUser;
-  guild?: IGuildSimple | null;
+  guild: IGuildSimple | null;
   session?: IUserSession;
   /** @deprecated Not used anywhere */
   matches?: IUserMatch[];
-  friends?: IModifiedUser[] | null;
-  stats?: IUserStatsGroup;
+  friends: IModifiedUser[] | null;
+  stats: IUserStatsGroup;
   skin: string;
 };
 
