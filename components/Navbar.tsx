@@ -1,4 +1,4 @@
-import { useState, memo, FunctionComponent, createRef } from "react";
+import { useState, memo, FunctionComponent, createRef, useContext } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -24,6 +24,8 @@ import ExposureNeg1RoundedIcon from "@material-ui/icons/ExposureNeg1Rounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import ThemeCtx from "./Theme";
 import { MySweetAlert } from "./MySweetAlert";
+
+type DrawerSide = "top" | "left" | "bottom" | "right";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,9 +98,11 @@ const Navbar: FunctionComponent = () => {
 
   const [playernameQuery, setQuery] = useState("");
   const [state, setState] = useState({ left: false, bottom: false });
+
   const inputRef = createRef<HTMLInputElement>();
 
-  type DrawerSide = "top" | "left" | "bottom" | "right";
+  const { switchTheme, themeState } = useContext(ThemeCtx);
+
   const toggleDrawer = (side: DrawerSide, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === "keydown" &&
@@ -169,18 +173,12 @@ const Navbar: FunctionComponent = () => {
       <Divider />
 
       <List>
-        <ThemeCtx.Consumer>
-          {({ themeState, switchTheme }) => {
-            return (
-              <ListItem button onClick={switchTheme}>
-                <ListItemIcon>
-                  <Switch size="small" checked={themeState.isDark ? true : false} color="primary" />
-                </ListItemIcon>
-                <ListItemText primary="Тёмная тема"></ListItemText>
-              </ListItem>
-            );
-          }}
-        </ThemeCtx.Consumer>
+        <ListItem button onClick={switchTheme}>
+          <ListItemIcon>
+            <Switch size="small" checked={themeState.isDark ? true : false} color="primary" />
+          </ListItemIcon>
+          <ListItemText primary="Тёмная тема"></ListItemText>
+        </ListItem>
       </List>
     </div>
   );
@@ -201,7 +199,7 @@ const Navbar: FunctionComponent = () => {
 
     inputRef.current!.value = "";
     setQuery("");
-    router.push("/player/[name]", "/player/" + playernameQuery);
+    router.push("/player/[name]", `/player/${playernameQuery}`);
   };
 
   return (
