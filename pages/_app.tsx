@@ -12,7 +12,7 @@ import "../styles/demotions.scss";
 import "../styles/player.scss";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
-  const [currentTheme, setTheme] = useState({ isDark: false });
+  const [themeState, setTheme] = useState({ isDark: false });
 
   const setDark = () => {
     localStorage.setItem("color-theme", "dark");
@@ -41,30 +41,17 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   }, []);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("color-theme");
-
-    if (savedTheme === "dark") {
-      setDark();
-    } else {
-      setLight();
-    }
+    localStorage.getItem("color-theme") === "dark" ? setDark() : setLight();
   }, []);
 
   return (
     <Fragment>
-      <ThemeCtx.Provider
-        value={{
-          themeState: currentTheme,
-          setDark: setDark,
-          setLight: setLight,
-          switchTheme: switchTheme,
-        }}
-      >
-        <ThemeProvider theme={currentTheme.isDark ? darkTheme : betterLight}>
+      <ThemeCtx.Provider value={{ themeState, setDark, setLight, switchTheme }}>
+        <ThemeProvider theme={themeState.isDark ? darkTheme : betterLight}>
           <ProgressBar
             height={6}
             options={{ showSpinner: true }}
-            color={currentTheme.isDark ? darkTheme.palette.primary.main : "#000000"}
+            color={themeState.isDark ? darkTheme.palette.primary.main : "#000000"}
           />
           <CssBaseline />
           <Component {...pageProps} />
