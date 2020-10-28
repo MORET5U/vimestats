@@ -47,7 +47,7 @@ const Skin3d: FC<Props> = ({
     return () => {
       setViewer(undefined);
       skinviewRef.current?.remove();
-      
+
       console.log("[SKIN3D] Cleaning up");
     };
   }, [skinviewRef.current]);
