@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const processedUser = await Processors.user(user, { noGuild: true });
 
     // We should get user's skin and cape as well as other data and include data URI
-    const skinDataURI = await Axios.get(`https://skin.vimeworld.ru/raw/skin/${user.username}.png?_=${uuid()}`, {
+    const skinDataURI = await Axios.get(`http://skin.vimeworld.ru/game/v2/skin/${user.username}.png?_=${uuid()}`, {
       responseType: "arraybuffer",
     })
       .then((res) => Buffer.from(res.data, "binary").toString("base64"))
@@ -54,7 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       .catch((_e: any) => steveSkinURI);
 
     // We should get user's skin as well as other data and include data URI
-    const capeDataURI = await Axios.get(`https://skin.vimeworld.ru/raw/cape/${user.username}.png?_=${uuid()}`, {
+    const capeDataURI = await Axios.get(`https://skin.vimeworld.ru/game/v2/cape/${user.username}.png?_=${uuid()}`, {
       responseType: "arraybuffer",
     })
       .then((res) => Buffer.from(res.data, "binary").toString("base64"))
