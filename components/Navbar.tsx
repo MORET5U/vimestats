@@ -22,6 +22,7 @@ import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import SecurityRoundedIcon from "@material-ui/icons/SecurityRounded";
 import ExposureNeg1RoundedIcon from "@material-ui/icons/ExposureNeg1Rounded";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import ThemeCtx from "./Theme";
 import { MySweetAlert } from "./MySweetAlert";
 
@@ -168,6 +169,17 @@ const Navbar: FunctionComponent = () => {
             </ListItem>
           </a>
         </Link>
+      </List>
+
+      <List>
+        <a className={classes.drawerLinkItem} href="https://github.com/cyber-snowflake/vimestats">
+          <ListItem button>
+            <ListItemIcon>
+              <GitHubIcon />
+            </ListItemIcon>
+            <ListItemText primary="Исходный код" />
+          </ListItem>
+        </a>
       </List>
 
       <Divider />
