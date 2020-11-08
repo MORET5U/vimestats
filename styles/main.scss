@@ -66,3 +66,13 @@
 .paper {
   padding: 16px;
 }
+
+.navbar_title {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+
+  .navbar_title__vime {
+    font-weight: 700;
+  }
+}

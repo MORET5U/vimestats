@@ -87,10 +87,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  linkTitle: {
-    textDecoration: "none",
-    color: "inherit",
-  },
 }));
 
 const Navbar: FunctionComponent = () => {
@@ -228,7 +224,9 @@ const Navbar: FunctionComponent = () => {
 
           <Typography className={classes.title} variant="h6" noWrap>
             <Link href="/">
-              <a className={classes.linkTitle}>VIMESTATS</a>
+              <a className="navbar_title">
+                <span className="navbar_title__vime">VIME</span>STATS
+              </a>
             </Link>
           </Typography>
 
