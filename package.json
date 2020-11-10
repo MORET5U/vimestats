@@ -18,6 +18,7 @@
     "axios": "^0.21.0",
     "moment": "^2.29.1",
     "next": "^10.0.0",
+    "next-google-fonts": "^1.2.1",
     "node-sass": "^4.14.1",
     "nprogress": "^0.2.0",
     "react": "^17.0.1",
