@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { IUser, IUserFriendsRaw, IUserSessionRaw, IUserStatsRaw } from "vime-types/models/User";
+import { IUser, IUserSession, IUserStatsRaw } from "vime-types/models/User";
 import { IError } from "vime-types/models/Errors";
 import Validator from "../../../utils/validation";
 import { Processors } from "utils/processing";
@@ -27,11 +27,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // If validation was successful we proceed to fetching user data
-    const user = await Axios.get(`${process.env.VIME_API_URI}/user/name/${name}`, {
+    const user: IUser = await Axios.get(`${process.env.VIME_API_URI}/user/name/${name}`, {
       headers: { "Access-Token": process.env.VIME_API_KEY },
     })
-      .then((fres) => fres.data)
-      .then((data: IUser[]) => data[0])
+      .then(({ data }) => data[0])
       .catch((error: Error) => {
         throw error;
       });
@@ -49,7 +48,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const skinDataURI = await Axios.get(`http://skin.vimeworld.ru/game/v2/skin/${user.username}.png?_=${uuid()}`, {
       responseType: "arraybuffer",
     })
-      .then((res) => Buffer.from(res.data, "binary").toString("base64"))
+      .then(({ data }) => Buffer.from(data, "binary").toString("base64"))
       .then((b64) => `data:image/png;base64,${b64}`)
       .catch((_e: any) => steveSkinURI);
 
@@ -57,7 +56,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const capeDataURI = await Axios.get(`https://skin.vimeworld.ru/game/v2/cape/${user.username}.png?_=${uuid()}`, {
       responseType: "arraybuffer",
     })
-      .then((res) => Buffer.from(res.data, "binary").toString("base64"))
+      .then(({ data }) => Buffer.from(data, "binary").toString("base64"))
       .then((b64) => `data:image/png;base64,${b64}`)
       .catch((_e: any) => undefined);
 
@@ -65,11 +64,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const guild = user.guild;
 
     // Proceed to gettting session data
-    const session = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/session`, {
+    const session: IUserSession = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/session`, {
       headers: { "Access-Token": process.env.VIME_API_KEY },
     })
-      .then((res) => res.data)
-      .then((data: IUserSessionRaw) => data.online)
+      .then(({ data }) => data.online)
       .catch((err: Error) => {
         throw err;
       });
@@ -78,20 +76,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     let friends: IUser[] | null = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/friends`, {
       headers: { "Access-Token": process.env.VIME_API_KEY },
     })
-      .then((res) => res.data)
-      .then((data: IUserFriendsRaw) => data.friends)
+      .then(({ data }) => data.friends)
       .catch((err: Error) => {
         throw err;
       });
 
     let friendsProcessed: IModifiedUser[] | null = [];
-    if (friends.length > 0) {
-      for (let i = 0; i < friends.length; i++) {
-        let friend = friends[i];
-        friendsProcessed[i] = await Processors.user(friend);
+    if (friends) {
+      if (friends.length > 0) {
+        for (let i = 0; i < friends.length; i++) {
+          let friend = friends[i];
+          friendsProcessed[i] = await Processors.user(friend);
+        }
+      } else {
+        friendsProcessed = null;
       }
-    } else {
-      friendsProcessed = null;
     }
 
     // Time to get stats
