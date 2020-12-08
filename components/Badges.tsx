@@ -7,26 +7,26 @@ import MemoryRoundedIcon from "@material-ui/icons/MemoryRounded";
 import { makeStyles } from "@material-ui/core";
 import { Flags } from "utils/enums";
 
-const useStyles = makeStyles((forcedColor?: string) => ({
+const useStyles = makeStyles(() => ({
   developer: {
-    color: !forcedColor ? forcedColor : "#bb86fc",
-    fontSize: "1.75rem",
-    verticalAlign: "-0.18em",
+    color: "#e800d5 !important",
+    fontSize: "1.75rem !important",
+    verticalAlign: "-0.18em !important",
   },
   admin: {
-    color: !forcedColor ? forcedColor : "#fbb848",
-    fontSize: "1.8rem",
-    verticalAlign: "-0.28rem",
+    color: "#fbb848 !important",
+    fontSize: "1.8rem !important",
+    verticalAlign: "-0.28rem !important",
   },
   supporter: {
-    color: !forcedColor ? forcedColor : "#d43e3e",
-    fontSize: "1.7rem",
-    verticalAlign: "-0.22rem",
+    color: "#d43e3e !important",
+    fontSize: "1.7rem !important",
+    verticalAlign: "-0.22rem !important",
   },
   bestmod: {
-    color: !forcedColor ? forcedColor : "#4777e6",
-    fontSize: "1.75rem",
-    verticalAlign: "-0.25rem",
+    color: "#4777e6 !important",
+    fontSize: "1.75rem !important",
+    verticalAlign: "-0.25rem !important",
   },
 }));
 
@@ -48,11 +48,10 @@ const BadgeTooltip: FC<TooltipProps> = ({ children, title }) => (
 
 interface Props {
   flags: number;
-  forcedColor?: string;
 }
 
-const Badges: FC<Props> = ({ flags, forcedColor = undefined }) => {
-  const classes = useStyles(forcedColor);
+const Badges: FC<Props> = ({ flags }) => {
+  const classes = useStyles();
 
   return (
     <Fragment>
