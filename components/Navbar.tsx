@@ -1,30 +1,32 @@
-import { useState, memo, FunctionComponent, createRef, useContext } from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { createRef, FC, FunctionComponent, memo, ReactElement, useContext, useState } from "react";
+
 import {
   AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  InputBase,
-  Drawer,
   Divider,
+  Drawer,
+  IconButton,
+  InputBase,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Switch,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
+import ExposureNeg1RoundedIcon from "@material-ui/icons/ExposureNeg1Rounded";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import MenuIcon from "@material-ui/icons/MenuRounded";
 import SearchIcon from "@material-ui/icons/SearchRounded";
-import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import SecurityRoundedIcon from "@material-ui/icons/SecurityRounded";
-import ExposureNeg1RoundedIcon from "@material-ui/icons/ExposureNeg1Rounded";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import ThemeCtx from "./Theme";
+
 import { MySweetAlert } from "./MySweetAlert";
+import ThemeCtx from "./Theme";
 
 type DrawerSide = "top" | "left" | "bottom" | "right";
 
@@ -89,6 +91,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+interface DrawerButtonP {
+  text: string;
+  icon: ReactElement;
+  href: string;
+}
+
+const DrawerButton: FC<DrawerButtonP> = ({ icon, text, href }) => {
+  const classes = useStyles();
+
+  return (
+    <List>
+      <Link href={href}>
+        <a className={classes.drawerLinkItem}>
+          <ListItem button>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        </a>
+      </Link>
+    </List>
+  );
+};
+
 const Navbar: FunctionComponent = () => {
   const router = useRouter();
   const classes = useStyles();
@@ -113,70 +138,14 @@ const Navbar: FunctionComponent = () => {
 
   const sideList = (side: DrawerSide) => (
     <div className={classes.list} role="presentation" onKeyDown={toggleDrawer(side, false)}>
-      <List>
-        <Link href="/">
-          <a className={classes.drawerLinkItem}>
-            <ListItem button>
-              <ListItemIcon>
-                <HomeRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Главная" />
-            </ListItem>
-          </a>
-        </Link>
-      </List>
-
-      <List>
-        <Link href="/staff">
-          <a className={classes.drawerLinkItem}>
-            <ListItem button>
-              <ListItemIcon>
-                <SecurityRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Модераторы" />
-            </ListItem>
-          </a>
-        </Link>
-      </List>
-
-      <List>
-        <Link href="/demotions">
-          <a className={classes.drawerLinkItem}>
-            <ListItem button>
-              <ListItemIcon>
-                <ExposureNeg1RoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Принятоснятия" />
-            </ListItem>
-          </a>
-        </Link>
-      </List>
+      <DrawerButton href="/" text="Главная" icon={<HomeRoundedIcon />} />
+      <DrawerButton href="/staff" text="Модераторы" icon={<SecurityRoundedIcon />} />
+      <DrawerButton href="/demotions" text="Принятоснятия" icon={<ExposureNeg1RoundedIcon />} />
 
       <Divider />
 
-      <List>
-        <Link href="/donate">
-          <a className={classes.drawerLinkItem}>
-            <ListItem button>
-              <ListItemIcon>
-                <AttachMoneyIcon />
-              </ListItemIcon>
-              <ListItemText primary="Пожертвовать" />
-            </ListItem>
-          </a>
-        </Link>
-      </List>
-
-      <List>
-        <a className={classes.drawerLinkItem} href="https://github.com/cyber-snowflake/vimestats">
-          <ListItem button>
-            <ListItemIcon>
-              <GitHubIcon />
-            </ListItemIcon>
-            <ListItemText primary="Исходный код" />
-          </ListItem>
-        </a>
-      </List>
+      <DrawerButton href="/donate" text="Пожертвовать" icon={<AttachMoneyIcon />} />
+      <DrawerButton href="https://github.com/cyber-snowflake/vimestats" text="Исходный код" icon={<GitHubIcon />} />
 
       <Divider />
 
