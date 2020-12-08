@@ -1,59 +1,82 @@
-import { Fragment, FC } from "react";
+import { Fragment, FC, ReactElement } from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
 import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
 import MemoryRoundedIcon from "@material-ui/icons/MemoryRounded";
+import { makeStyles } from "@material-ui/core";
 
-type Props = {
+const useStyles = makeStyles((forcedColor?: string) => ({
+  developer: {
+    color: !forcedColor ? forcedColor : "#bb86fc",
+    fontSize: "1.75rem",
+    verticalAlign: "-0.18em",
+  },
+  admin: {
+    color: !forcedColor ? forcedColor : "#fbb848",
+    fontSize: "1.8rem",
+    verticalAlign: "-0.28rem",
+  },
+  supporter: {
+    color: !forcedColor ? forcedColor : "#d43e3e",
+    fontSize: "1.7rem",
+    verticalAlign: "-0.22rem",
+  },
+  bestmod: {
+    color: !forcedColor ? forcedColor : "#4777e6",
+    fontSize: "1.75rem",
+    verticalAlign: "-0.25rem",
+  },
+}));
+
+interface TooltipProps {
+  title: string;
+  children: ReactElement;
+}
+
+const BadgeTooltip: FC<TooltipProps> = ({ children, title }) => (
+  <Tooltip
+    disableFocusListener
+    disableTouchListener
+    title={<span className="badgeTooltip">{title}</span>}
+    placement="top"
+  >
+    {children}
+  </Tooltip>
+);
+
+interface Props {
   flags: number;
-};
+  forcedColor?: string;
+}
 
-const Badges: FC<Props> = ({ flags }) => {
+const Badges: FC<Props> = ({ flags, forcedColor = undefined }) => {
+  const classes = useStyles(forcedColor);
+
   return (
     <Fragment>
-      {(flags & 0x02) === 0x02 && (
-        <Tooltip
-          disableFocusListener
-          disableTouchListener
-          title={<span className="badgeTooltip">Админ Тысячелетия</span>}
-          placement="top"
-        >
-          <StarRoundedIcon className="playerBadge vimeAdminBadge" />
-        </Tooltip>
+      {(flags & 1) === 1 && (
+        <BadgeTooltip title="Разработчик VimeStats">
+          <MemoryRoundedIcon className={"playerBadge " + classes.developer} />
+        </BadgeTooltip>
       )}
 
-      {(flags & 0x01) === 0x01 && (
-        <Tooltip
-          disableFocusListener
-          disableTouchListener
-          title={<span className="badgeTooltip">Разработчик VimeStats</span>}
-          placement="top"
-        >
-          <MemoryRoundedIcon className="playerBadge developerBadge" />
-        </Tooltip>
+      {(flags & 2) === 2 && (
+        <BadgeTooltip title="Админ Тысячелетия">
+          <StarRoundedIcon className={"playerBadge " + classes.admin} />
+        </BadgeTooltip>
       )}
 
-      {(flags & 0x04) === 0x04 && (
-        <Tooltip
-          disableFocusListener
-          disableTouchListener
-          title={<span className="badgeTooltip">Поддержавший проект</span>}
-          placement="top"
-        >
-          <FavoriteRoundedIcon className="playerBadge projectSupporterBadge" />
-        </Tooltip>
+      {(flags & 4) === 4 && (
+        <BadgeTooltip title="Раннее Поддержавшие">
+          <FavoriteRoundedIcon className={"playerBadge " + classes.supporter} />
+        </BadgeTooltip>
       )}
 
-      {(flags & 0x10) === 0x10 && (
-        <Tooltip
-          disableFocusListener
-          disableTouchListener
-          title={<span className="badgeTooltip">Бывалый Модератор</span>}
-          placement="top"
-        >
-          <DoneOutlineRoundedIcon className="playerBadge goodModeratorBadge" />
-        </Tooltip>
+      {(flags & 8) === 8 && (
+        <BadgeTooltip title="Бывалый Модератор">
+          <DoneOutlineRoundedIcon className={"playerBadge " + classes.bestmod} />
+        </BadgeTooltip>
       )}
     </Fragment>
   );
