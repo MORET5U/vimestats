@@ -5,6 +5,7 @@ import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
 import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
 import MemoryRoundedIcon from "@material-ui/icons/MemoryRounded";
 import { makeStyles } from "@material-ui/core";
+import { Flags } from "utils/enums";
 
 const useStyles = makeStyles((forcedColor?: string) => ({
   developer: {
@@ -55,25 +56,25 @@ const Badges: FC<Props> = ({ flags, forcedColor = undefined }) => {
 
   return (
     <Fragment>
-      {(flags & 1) === 1 && (
+      {(flags & Flags.developer) === Flags.developer && (
         <BadgeTooltip title="Разработчик VimeStats">
           <MemoryRoundedIcon className={"playerBadge " + classes.developer} />
         </BadgeTooltip>
       )}
 
-      {(flags & 2) === 2 && (
+      {(flags & Flags.admin) === Flags.admin && (
         <BadgeTooltip title="Админ Тысячелетия">
           <StarRoundedIcon className={"playerBadge " + classes.admin} />
         </BadgeTooltip>
       )}
 
-      {(flags & 4) === 4 && (
+      {(flags & Flags.supporter) === Flags.supporter && (
         <BadgeTooltip title="Раннее Поддержавшие">
           <FavoriteRoundedIcon className={"playerBadge " + classes.supporter} />
         </BadgeTooltip>
       )}
 
-      {(flags & 8) === 8 && (
+      {(flags & Flags.bestmod) === Flags.bestmod && (
         <BadgeTooltip title="Бывалый Модератор">
           <DoneOutlineRoundedIcon className={"playerBadge " + classes.bestmod} />
         </BadgeTooltip>
