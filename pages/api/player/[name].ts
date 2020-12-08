@@ -1,12 +1,13 @@
 import Axios from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
-import { IUser, IUserSession, IUserStatsRaw } from "vime-types/models/User";
-import { IError } from "vime-types/models/Errors";
-import Validator from "../../../utils/validation";
-import { Processors } from "utils/processing";
 import { IModifiedUser, UserData } from "interfaces";
-import { v4 as uuid } from "uuid";
 import { steveSkinURI } from "libs/skinview-utils";
+import { NextApiRequest, NextApiResponse } from "next";
+import { Processors } from "utils/processing";
+import { v4 as uuid } from "uuid";
+import { IError } from "vime-types/models/Errors";
+import { IUser, IUserSession, IUserStatsRaw } from "vime-types/models/User";
+
+import Validator from "../../../utils/validation";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

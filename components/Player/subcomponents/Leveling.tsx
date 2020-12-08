@@ -1,6 +1,8 @@
-import { Fragment, FunctionComponent } from "react";
-import { Typography, Divider, Box } from "@material-ui/core";
-import { IModifiedUser } from "../../../interfaces";
+import { Fragment, FunctionComponent } from 'react';
+
+import { Box, Divider, Typography } from '@material-ui/core';
+
+import { IModifiedUser } from '../../../interfaces';
 
 interface Props {
   user: IModifiedUser;

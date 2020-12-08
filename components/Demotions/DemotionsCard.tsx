@@ -1,8 +1,10 @@
-import React, { FunctionComponent } from "react";
-import { Paper, Grid, Avatar } from "@material-ui/core";
-import moment from "moment";
-import { IPostArticle } from "../../interfaces";
-import { randomLetters } from "../../utils/randomizer";
+import moment from 'moment';
+import React, { FunctionComponent } from 'react';
+
+import { Avatar, Grid, Paper } from '@material-ui/core';
+
+import { IPostArticle } from '../../interfaces';
+import { randomLetters } from '../../utils/randomizer';
 
 type Props = {
   post: IPostArticle;

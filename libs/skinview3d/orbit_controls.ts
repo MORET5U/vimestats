@@ -1,6 +1,7 @@
-import { SkinViewer } from "./viewer";
 import { Vector3 } from "three";
+
 import { OrbitControls } from "../three-orbitcontrols";
+import { SkinViewer } from "./viewer";
 
 export function createOrbitControls(skinViewer: SkinViewer): OrbitControls {
   const control = new OrbitControls(skinViewer.camera, skinViewer.renderer.domElement);

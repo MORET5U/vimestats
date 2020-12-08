@@ -1,15 +1,17 @@
-import { Fragment, FC, useEffect, useState } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import ThemeCtx, { betterLight, darkTheme } from "../components/Theme";
-import ProgressBar from "../components/ProgressBar";
-import { AppProps } from "next/app";
-
 import "../styles/main.scss";
 import "../styles/badges.scss";
 import "../styles/darkscroller.scss";
 import "../styles/demotions.scss";
 import "../styles/player.scss";
+
+import { AppProps } from "next/app";
+import { FC, Fragment, useEffect, useState } from "react";
+
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/core/styles";
+
+import ProgressBar from "../components/ProgressBar";
+import ThemeCtx, { betterLight, darkTheme } from "../components/Theme";
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const [themeState, setTheme] = useState({ isDark: false });

@@ -1,4 +1,5 @@
 import { Clock } from "three";
+
 import { PlayerObject } from "./model";
 
 export interface IAnimation {

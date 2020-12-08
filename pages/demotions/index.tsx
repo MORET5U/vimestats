@@ -1,10 +1,12 @@
-import { Fragment } from "react";
-import Layout from "../../components/Layout";
-import { Container } from "@material-ui/core";
-import { IPostArticle } from "../../interfaces";
 import Axios, { AxiosError } from "axios";
-import DemotionsRenderer from "../../components/Demotions/DemotionsRenderer";
 import { NextPage } from "next";
+import { Fragment } from "react";
+
+import { Container } from "@material-ui/core";
+
+import DemotionsRenderer from "../../components/Demotions/DemotionsRenderer";
+import Layout from "../../components/Layout";
+import { IPostArticle } from "../../interfaces";
 
 type Props = {
   data?: IPostArticle[];

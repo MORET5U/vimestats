@@ -1,5 +1,6 @@
-import React from "react";
-import { Typography, Tooltip } from "@material-ui/core";
+import React from 'react';
+
+import { Tooltip, Typography } from '@material-ui/core';
 
 /**
  * BUG:

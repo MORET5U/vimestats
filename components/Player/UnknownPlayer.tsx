@@ -1,7 +1,9 @@
-import { FunctionComponent } from "react";
-import Layout from "../Layout";
-import { Container, Typography, Divider, Box, Button } from "@material-ui/core";
-import Link from "next/link";
+import Link from 'next/link';
+import { FunctionComponent } from 'react';
+
+import { Box, Button, Container, Divider, Typography } from '@material-ui/core';
+
+import Layout from '../Layout';
 
 type Props = {
   query: string;

@@ -1,7 +1,9 @@
-import { FunctionComponent } from "react";
-import { Typography, Grid, Divider, Box } from "@material-ui/core";
-import { KDR, WLR } from "../../../Stats/CustomRows";
-import { ILuckyWars } from "vime-types/models/Stats";
+import { FunctionComponent } from 'react';
+import { ILuckyWars } from 'vime-types/models/Stats';
+
+import { Box, Divider, Grid, Typography } from '@material-ui/core';
+
+import { KDR, WLR } from '../../../Stats/CustomRows';
 
 const KitPVP: FunctionComponent<ILuckyWars> = ({ global }) => (
   <Grid container direction="row">

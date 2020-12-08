@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
+
+import { Accordion, AccordionDetails, AccordionSummary, makeStyles, Typography } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { AccordionSummary, Accordion, AccordionDetails, makeStyles, Typography } from "@material-ui/core";
 
 type Props = {
   title: string;

@@ -1,6 +1,7 @@
-import { IUser } from "vime-types/models/User";
-import { IModifiedUser } from "../interfaces";
 import { v4 as uuid } from "uuid";
+import { IUser } from "vime-types/models/User";
+
+import { IModifiedUser } from "../interfaces";
 import overridesData from "./processOverrides.json";
 
 const userProcessorDefaultOptions = {

@@ -1,8 +1,10 @@
-import { Fragment, FunctionComponent } from "react";
-import { Typography, Tooltip, Divider, Box } from "@material-ui/core";
-import LensRoundedIcon from "@material-ui/icons/LensRounded";
-import { IModifiedUser } from "../../../interfaces";
-import { IUserSession } from "vime-types/models/User";
+import { Fragment, FunctionComponent } from 'react';
+import { IUserSession } from 'vime-types/models/User';
+
+import { Box, Divider, Tooltip, Typography } from '@material-ui/core';
+import LensRoundedIcon from '@material-ui/icons/LensRounded';
+
+import { IModifiedUser } from '../../../interfaces';
 
 const lastSeen = (timestamp: number): string | React.ReactElement => {
   if (timestamp <= 0) return "неизвестно";

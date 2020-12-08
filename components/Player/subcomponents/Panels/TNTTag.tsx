@@ -1,7 +1,9 @@
-import { FunctionComponent } from "react";
-import { ITntTag } from "vime-types/models/Stats";
-import { Grid, Typography, Box, Divider } from "@material-ui/core";
-import { WLR } from "../../../Stats/CustomRows";
+import { FunctionComponent } from 'react';
+import { ITntTag } from 'vime-types/models/Stats';
+
+import { Box, Divider, Grid, Typography } from '@material-ui/core';
+
+import { WLR } from '../../../Stats/CustomRows';
 
 const TNTTag: FunctionComponent<ITntTag> = ({ global }) => (
   <Grid container direction="row">

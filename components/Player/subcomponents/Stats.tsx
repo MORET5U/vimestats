@@ -1,25 +1,27 @@
 import { FunctionComponent } from "react";
-import { Grid } from "@material-ui/core";
-import Duels from "./Panels/Duels";
-import SkyWars from "./Panels/SkyWars";
-import HungerGames from "./Panels/HungerGames";
-import BedWars from "./Panels/BedWars";
-import Annihilation from "./Panels/Annihilation";
-import BuildBattle from "./Panels/BuildBattle";
-import KitPVP from "./Panels/KitPVP";
-import TheBridge from "./Panels/TheBridge";
-import GunGame from "./Panels/GunGame";
-import MobWars from "./Panels/MobWars";
-import ClashPoint from "./Panels/ClashPoint";
-import LuckyWars from "./Panels/LuckyWars";
 import { IUserStatsGroup } from "vime-types/models/Stats";
-import DeathRun from "./Panels/DeathRun";
-import TNTRun from "./Panels/TNTRun";
-import JumpLeague from "./Panels/JumpLeague";
+
+import { Grid } from "@material-ui/core";
+
+import Annihilation from "./Panels/Annihilation";
+import BedWars from "./Panels/BedWars";
 import BlockParty from "./Panels/BlockPaty";
+import BuildBattle from "./Panels/BuildBattle";
+import ClashPoint from "./Panels/ClashPoint";
+import DeathRun from "./Panels/DeathRun";
+import Duels from "./Panels/Duels";
+import GunGame from "./Panels/GunGame";
+import HungerGames from "./Panels/HungerGames";
+import JumpLeague from "./Panels/JumpLeague";
+import KitPVP from "./Panels/KitPVP";
+import LuckyWars from "./Panels/LuckyWars";
+import MobWars from "./Panels/MobWars";
 import MurderMystery from "./Panels/MurderMystery";
-import StatsAccordion from "./StatsAccordion";
+import SkyWars from "./Panels/SkyWars";
+import TheBridge from "./Panels/TheBridge";
+import TNTRun from "./Panels/TNTRun";
 import TNTTag from "./Panels/TNTTag";
+import StatsAccordion from "./StatsAccordion";
 
 type StatsProps = {
   stats: IUserStatsGroup;

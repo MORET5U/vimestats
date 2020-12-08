@@ -1,5 +1,6 @@
-import { createMuiTheme } from "@material-ui/core/styles";
 import { createContext } from "react";
+
+import { createMuiTheme } from "@material-ui/core/styles";
 
 export const darkTheme = createMuiTheme({
   overrides: {

@@ -1,6 +1,6 @@
-import { Component } from "react";
-import NProgress from "nprogress";
 import Router from "next/router";
+import NProgress from "nprogress";
+import { Component } from "react";
 
 type Props = {
   color?: string;

@@ -1,8 +1,10 @@
-import { FunctionComponent } from "react";
-import { Typography, Grid, Divider, Tooltip, Box } from "@material-ui/core";
-import InfoRoundedIcon from "@material-ui/icons/InfoRounded";
-import { WLR } from "../../../Stats/CustomRows";
-import { IHungerGames } from "vime-types/models/Stats";
+import { FunctionComponent } from 'react';
+import { IHungerGames } from 'vime-types/models/Stats';
+
+import { Box, Divider, Grid, Tooltip, Typography } from '@material-ui/core';
+import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
+
+import { WLR } from '../../../Stats/CustomRows';
 
 type Props = Omit<IHungerGames, "season">;
 

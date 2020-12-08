@@ -1,7 +1,9 @@
-import { FunctionComponent } from "react";
-import { Typography, Grid, Divider, Box } from "@material-ui/core";
-import { WLR } from "../../../Stats/CustomRows";
-import { IMurder } from "vime-types/models/Stats";
+import { FunctionComponent } from 'react';
+import { IMurder } from 'vime-types/models/Stats';
+
+import { Box, Divider, Grid, Typography } from '@material-ui/core';
+
+import { WLR } from '../../../Stats/CustomRows';
 
 const MurderMystery: FunctionComponent<IMurder> = ({ global }) => {
   const {

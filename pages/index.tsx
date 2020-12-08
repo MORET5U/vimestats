@@ -1,9 +1,11 @@
-import React, { useState } from "react";
 import { NextPage } from "next";
-import Layout from "../components/Layout";
 import { useRouter } from "next/router";
-import { Container, Box } from "@material-ui/core";
+import React, { useState } from "react";
+
+import { Box, Container } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
+
+import Layout from "../components/Layout";
 import { MySweetAlert } from "../components/MySweetAlert";
 
 const IndexPage: NextPage = () => {
@@ -27,10 +29,7 @@ const IndexPage: NextPage = () => {
         confirmButtonText: "Попробовать снова",
       });
     } else {
-      router.push(
-        "/player/[name]",
-        `/player/${encodeURIComponent(state.query.trim())}`
-      );
+      router.push("/player/[name]", `/player/${encodeURIComponent(state.query.trim())}`);
     }
   };
 

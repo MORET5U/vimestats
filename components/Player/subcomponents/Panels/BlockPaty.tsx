@@ -1,7 +1,9 @@
 import { FunctionComponent } from "react";
-import { Typography, Grid, Divider, Box } from "@material-ui/core";
-import { WLR } from "../../../Stats/CustomRows";
 import { IBlockParty } from "vime-types/models/Stats";
+
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
+
+import { WLR } from "../../../Stats/CustomRows";
 
 type Props = Omit<IBlockParty, "season">;
 

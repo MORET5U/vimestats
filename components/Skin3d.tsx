@@ -1,7 +1,8 @@
-import { createRef, Fragment, FC, useEffect, useState, useCallback } from "react";
-import { SkinViewer } from "../libs/skinview3d/viewer";
+import { createRef, FC, Fragment, useCallback, useEffect, useState } from "react";
+
 import { WalkingAnimation } from "../libs/skinview3d/animation";
 import { createOrbitControls } from "../libs/skinview3d/orbit_controls";
+import { SkinViewer } from "../libs/skinview3d/viewer";
 
 const Skin3d: FC<Props> = ({
   username,

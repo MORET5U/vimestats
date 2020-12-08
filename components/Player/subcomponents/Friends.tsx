@@ -1,15 +1,17 @@
-import React, { FunctionComponent, useEffect, useCallback } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import { Typography } from "@material-ui/core";
-import { IModifiedUser } from "../../../interfaces";
-import Link from "next/link";
+import Link from 'next/link';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
+
+import { Typography } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+
+import { IModifiedUser } from '../../../interfaces';
 
 type Props = {
   friends: IModifiedUser[] | null;

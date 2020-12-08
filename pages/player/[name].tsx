@@ -1,11 +1,12 @@
-import { Fragment } from "react";
-import { NextPageContext, NextPage } from "next";
-import { UserData } from "../../interfaces";
-import Layout from "../../components/Layout";
-import PlayerRenderer from "../../components/Player/PlayerRenderer";
 import Axios, { AxiosError } from "axios";
-import UnknownPlayer from "../../components/Player/UnknownPlayer";
+import { NextPage, NextPageContext } from "next";
+import { Fragment } from "react";
+
+import Layout from "../../components/Layout";
 import BadQuery from "../../components/Player/BadQuery";
+import PlayerRenderer from "../../components/Player/PlayerRenderer";
+import UnknownPlayer from "../../components/Player/UnknownPlayer";
+import { UserData } from "../../interfaces";
 
 type Props = {
   data?: UserData;

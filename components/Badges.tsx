@@ -1,11 +1,12 @@
-import { Fragment, FC, ReactElement } from "react";
-import Tooltip from "@material-ui/core/Tooltip";
-import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
-import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
-import ThumbUpRoundedIcon from '@material-ui/icons/ThumbUpRounded';
-import { makeStyles } from "@material-ui/core";
+import { FC, Fragment, ReactElement } from "react";
 import { Flags } from "utils/enums";
+
+import { makeStyles } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
+import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
+import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import ThumbUpRoundedIcon from "@material-ui/icons/ThumbUpRounded";
 
 const useStyles = makeStyles(() => ({
   developer: {
