@@ -3,15 +3,15 @@ import Tooltip from "@material-ui/core/Tooltip";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
 import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
-import MemoryRoundedIcon from "@material-ui/icons/MemoryRounded";
+import ThumbUpRoundedIcon from '@material-ui/icons/ThumbUpRounded';
 import { makeStyles } from "@material-ui/core";
 import { Flags } from "utils/enums";
 
 const useStyles = makeStyles(() => ({
   developer: {
-    color: "#e800d5 !important",
-    fontSize: "1.75rem !important",
-    verticalAlign: "-0.18em !important",
+    color: "#ad87f3 !important",
+    fontSize: "1.45rem !important",
+    verticalAlign: "-0.09em !important",
   },
   admin: {
     color: "#fbb848 !important",
@@ -57,7 +57,7 @@ const Badges: FC<Props> = ({ flags }) => {
     <Fragment>
       {(flags & Flags.developer) === Flags.developer && (
         <BadgeTooltip title="Разработчик VimeStats">
-          <MemoryRoundedIcon className={"playerBadge " + classes.developer} />
+          <ThumbUpRoundedIcon className={"playerBadge " + classes.developer} />
         </BadgeTooltip>
       )}
 
