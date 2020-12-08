@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Typography, Grid, Divider, Box } from "@material-ui/core";
-import { KDR, WLR } from "../../../CustomRows";
+import { KDR, WLR } from "../../../Stats/CustomRows";
 import { ILuckyWars } from "vime-types/models/Stats";
 
 const KitPVP: FunctionComponent<ILuckyWars> = ({ global }) => (

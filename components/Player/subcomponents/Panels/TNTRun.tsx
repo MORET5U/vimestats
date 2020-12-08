@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Typography, Grid, Divider, Box } from "@material-ui/core";
 import { ITntRun } from "vime-types/models/Stats";
-import { WLR } from "../../../CustomRows";
+import { WLR } from "../../../Stats/CustomRows";
 
 const TNTRun: FunctionComponent<ITntRun> = ({ global }) => (
   <Grid container direction="row">

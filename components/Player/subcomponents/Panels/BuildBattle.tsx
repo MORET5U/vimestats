@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Typography, Grid } from "@material-ui/core";
-import { WLR } from "../../../CustomRows";
+import { WLR } from "../../../Stats/CustomRows";
 import { IBuildBattle } from "vime-types/models/Stats";
 
 type Props = Omit<IBuildBattle, "season">;

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Typography, Grid, Divider, Box } from "@material-ui/core";
-import { KDR } from "../../../CustomRows";
+import { KDR } from "../../../Stats/CustomRows";
 import { IKitPvp } from "vime-types/models/Stats";
 
 type Props = Omit<IKitPvp, "season">;

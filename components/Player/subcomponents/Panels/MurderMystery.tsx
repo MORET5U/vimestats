@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { Typography, Grid, Divider, Box } from "@material-ui/core";
-import { WLR } from "../../../CustomRows";
+import { WLR } from "../../../Stats/CustomRows";
 import { IMurder } from "vime-types/models/Stats";
 
 const MurderMystery: FunctionComponent<IMurder> = ({ global }) => {
