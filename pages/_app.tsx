@@ -4,15 +4,23 @@ import "../styles/darkscroller.scss";
 import "../styles/demotions.scss";
 import "../styles/player.scss";
 
+import "focus-visible/dist/focus-visible";
+
 import { AppProps } from "next/app";
 import { FC, Fragment, useEffect, useState } from "react";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { Global, css } from "@emotion/react";
 
 import ProgressBar from "../components/ProgressBar";
-import ThemeCtx, { betterLight, darkTheme } from "../components/Theme";
+import ThemeCtx, { darkTheme } from "../components/Theme";
+
+const FocusOutlineHidden = css`
+  .js-focus-visible :focus:not([data-focus-visible-added]) {
+    outline: none;
+    box-shadow: none;
+  }
+`;
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   const [themeState, setTheme] = useState({ isDark: false });
@@ -48,13 +56,13 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     <Fragment>
       <ThemeCtx.Provider value={{ themeState, setDark, setLight, switchTheme }}>
         <ChakraProvider>
-            <ProgressBar
-              height={6}
-              options={{ showSpinner: true }}
-              color={themeState.isDark ? darkTheme.palette.primary.main : "#000000"}
-            />
-            <CssBaseline />
-            <Component {...pageProps} />
+          <Global styles={FocusOutlineHidden} />
+          <ProgressBar
+            height={6}
+            options={{ showSpinner: true }}
+            color={themeState.isDark ? darkTheme.palette.primary.main : "#000000"}
+          />
+          <Component {...pageProps} />
         </ChakraProvider>
       </ThemeCtx.Provider>
     </Fragment>
