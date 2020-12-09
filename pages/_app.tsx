@@ -7,6 +7,7 @@ import "../styles/player.scss";
 import { AppProps } from "next/app";
 import { FC, Fragment, useEffect, useState } from "react";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 
@@ -27,11 +28,8 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   };
 
   const switchTheme = () => {
-    if (localStorage.getItem("color-theme")?.toLowerCase() === "dark") {
-      setLight();
-    } else {
-      setDark();
-    }
+    if (localStorage.getItem("color-theme")?.toLowerCase() === "dark") setLight();
+    else setDark();
   };
 
   useEffect(() => {
@@ -49,15 +47,15 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <Fragment>
       <ThemeCtx.Provider value={{ themeState, setDark, setLight, switchTheme }}>
-        <ThemeProvider theme={themeState.isDark ? darkTheme : betterLight}>
-          <ProgressBar
-            height={6}
-            options={{ showSpinner: true }}
-            color={themeState.isDark ? darkTheme.palette.primary.main : "#000000"}
-          />
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <ChakraProvider>
+            <ProgressBar
+              height={6}
+              options={{ showSpinner: true }}
+              color={themeState.isDark ? darkTheme.palette.primary.main : "#000000"}
+            />
+            <CssBaseline />
+            <Component {...pageProps} />
+        </ChakraProvider>
       </ThemeCtx.Provider>
     </Fragment>
   );
