@@ -2,8 +2,6 @@ import Axios, { AxiosError } from "axios";
 import { NextPage } from "next";
 import { Fragment } from "react";
 
-import { Container } from "@material-ui/core";
-
 import DemotionsRenderer from "../../components/Demotions/DemotionsRenderer";
 import Layout from "../../components/Layout";
 import { IPostArticle } from "../../interfaces";
@@ -31,7 +29,7 @@ const DemotionsPage: NextPage<Props> = ({ data, errors }) => {
         title="Снятия и принятия | VimeStats"
         description="Свежая информация о снятых и принятых на должность Модераторах VimeWorld MiniGames"
       >
-        <Container maxWidth="md">{data !== undefined ? <DemotionsRenderer data={data} /> : <></>}</Container>
+        {data !== undefined ? <DemotionsRenderer data={data} /> : <></>}
       </Layout>
     </Fragment>
   );
