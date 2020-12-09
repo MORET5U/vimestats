@@ -27,6 +27,7 @@ import SecurityRoundedIcon from "@material-ui/icons/SecurityRounded";
 
 import { MySweetAlert } from "./MySweetAlert";
 import ThemeCtx from "./Theme";
+import { DiscordIcon } from "./CustomIcons";
 
 type DrawerSide = "top" | "left" | "bottom" | "right";
 
@@ -144,8 +145,10 @@ const Navbar: FunctionComponent = () => {
 
       <Divider />
 
-      <DrawerButton href="/donate" text="Пожертвовать" icon={<AttachMoneyIcon />} />
+      <DrawerButton href="https://go.defracted.net/discord" text="Discord" icon={<DiscordIcon />} />
       <DrawerButton href="https://github.com/cyber-snowflake/vimestats" text="Исходный код" icon={<GitHubIcon />} />
+
+      <DrawerButton href="/donate" text="Пожертвовать" icon={<AttachMoneyIcon />} />
 
       <Divider />
 
