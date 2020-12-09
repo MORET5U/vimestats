@@ -1,8 +1,8 @@
-import { Fragment, FunctionComponent } from 'react';
+import { Fragment, FunctionComponent } from "react";
 
-import { Box, Divider, Grid, Typography } from '@material-ui/core';
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
-import Skin3d from '../../Skin3d';
+import Skin3d from "../../Skin3d";
 
 type Props = {
   username: string;

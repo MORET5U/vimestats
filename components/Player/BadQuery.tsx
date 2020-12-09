@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { FunctionComponent } from 'react';
+import Link from "next/link";
+import { FunctionComponent } from "react";
 
-import { Box, Button, Container, Divider, Typography } from '@material-ui/core';
+import { Box, Button, Container, Divider, Typography } from "@material-ui/core";
 
-import Layout from '../Layout';
+import Layout from "../Layout";
 
 const BadQuery: FunctionComponent = () => {
   return (

@@ -1,19 +1,12 @@
-import { FunctionComponent } from 'react';
-import { IMurder } from 'vime-types/models/Stats';
+import { FunctionComponent } from "react";
+import { IMurder } from "vime-types/models/Stats";
 
-import { Box, Divider, Grid, Typography } from '@material-ui/core';
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
-import { WLR } from '../../../Stats/CustomRows';
+import { WLR } from "../../../Stats/CustomRows";
 
 const MurderMystery: FunctionComponent<IMurder> = ({ global }) => {
-  const {
-    games,
-    kills,
-    total_wins,
-    wins_as_detective,
-    wins_as_innocent,
-    wins_as_maniac,
-  } = global;
+  const { games, kills, total_wins, wins_as_detective, wins_as_innocent, wins_as_maniac } = global;
 
   return (
     <Grid container direction="row">

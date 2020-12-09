@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react';
-import { IDuels } from 'vime-types/models/Stats';
+import { FunctionComponent } from "react";
+import { IDuels } from "vime-types/models/Stats";
 
-import { Box, Divider, Grid, Typography } from '@material-ui/core';
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
 type Props = Omit<IDuels, "season">;
 
@@ -16,8 +16,7 @@ const Duels: FunctionComponent<Props> = ({ global }) => (
       </Typography>
       {global["total_games"] > 0 && (
         <Typography>
-          <strong>Общий процент побед:</strong>{" "}
-          {((global["total_wins"] / global["total_games"]) * 100).toFixed(2)}%
+          <strong>Общий процент побед:</strong> {((global["total_wins"] / global["total_games"]) * 100).toFixed(2)}%
         </Typography>
       )}
 
@@ -41,8 +40,7 @@ const Duels: FunctionComponent<Props> = ({ global }) => (
       </Typography>
       {global["solo_games"] > 0 && (
         <Typography>
-          <strong>Процент одиночных побед:</strong>{" "}
-          {((global["solo_wins"] / global["solo_games"]) * 100).toFixed(2)}%
+          <strong>Процент одиночных побед:</strong> {((global["solo_wins"] / global["solo_games"]) * 100).toFixed(2)}%
         </Typography>
       )}
 
@@ -58,8 +56,7 @@ const Duels: FunctionComponent<Props> = ({ global }) => (
       </Typography>
       {global["team_games"] > 0 && (
         <Typography>
-          <strong>Процент командных побед:</strong>{" "}
-          {((global["team_wins"] / global["team_games"]) * 100).toFixed(2)}%
+          <strong>Процент командных побед:</strong> {((global["team_wins"] / global["team_games"]) * 100).toFixed(2)}%
         </Typography>
       )}
 

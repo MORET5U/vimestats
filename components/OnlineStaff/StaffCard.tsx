@@ -1,12 +1,12 @@
-import Badges from 'components/Badges';
-import Link from 'next/link';
-import { FC, Fragment, memo } from 'react';
+import Badges from "components/Badges";
+import Link from "next/link";
+import { FC, Fragment, memo } from "react";
 
-import { Grid, Paper, Tooltip, Typography } from '@material-ui/core';
-import LensRoundedIcon from '@material-ui/icons/LensRounded';
+import { Grid, Paper, Tooltip, Typography } from "@material-ui/core";
+import LensRoundedIcon from "@material-ui/icons/LensRounded";
 
-import { IOnlineModer } from '../../interfaces';
-import { useStyles } from './Styles';
+import { IOnlineModer } from "../../interfaces";
+import { useStyles } from "./Styles";
 
 type Props = {
   data: IOnlineModer;

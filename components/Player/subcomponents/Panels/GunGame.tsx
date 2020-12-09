@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
-import { IGunGame } from 'vime-types/models/Stats';
+import { FunctionComponent } from "react";
+import { IGunGame } from "vime-types/models/Stats";
 
-import { Box, Divider, Grid, Typography } from '@material-ui/core';
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
-import { WLR } from '../../../Stats/CustomRows';
+import { WLR } from "../../../Stats/CustomRows";
 
 type Props = Omit<IGunGame, "season">;
 

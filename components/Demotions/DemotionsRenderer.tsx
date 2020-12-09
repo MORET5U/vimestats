@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import { createRef, Fragment, FunctionComponent } from 'react';
+import { useRouter } from "next/router";
+import { createRef, Fragment, FunctionComponent } from "react";
 
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from "@material-ui/core";
 
-import { IPostArticle } from '../../interfaces';
-import { MySweetAlert } from '../MySweetAlert';
-import SearchField from '../SearchField';
-import DemotionsCard from './DemotionsCard';
+import { IPostArticle } from "../../interfaces";
+import { MySweetAlert } from "../MySweetAlert";
+import SearchField from "../SearchField";
+import DemotionsCard from "./DemotionsCard";
 
 type Props = {
   data: IPostArticle[];

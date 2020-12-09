@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react';
-import { IAnnihilation } from 'vime-types/models/Stats';
+import { FunctionComponent } from "react";
+import { IAnnihilation } from "vime-types/models/Stats";
 
-import { Box, Divider, Grid, Typography } from '@material-ui/core';
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
 type Props = Omit<IAnnihilation, "season">;
 

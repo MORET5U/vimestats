@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
-import { IDeathRun } from 'vime-types/models/Stats';
+import { FunctionComponent } from "react";
+import { IDeathRun } from "vime-types/models/Stats";
 
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from "@material-ui/core";
 
-import { WLR } from '../../../Stats/CustomRows';
+import { WLR } from "../../../Stats/CustomRows";
 
 type Props = Omit<IDeathRun, "season">;
 

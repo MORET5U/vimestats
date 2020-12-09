@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react';
-import { IHungerGames } from 'vime-types/models/Stats';
+import { FunctionComponent } from "react";
+import { IHungerGames } from "vime-types/models/Stats";
 
-import { Box, Divider, Grid, Tooltip, Typography } from '@material-ui/core';
-import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
+import { Box, Divider, Grid, Tooltip, Typography } from "@material-ui/core";
+import InfoRoundedIcon from "@material-ui/icons/InfoRounded";
 
-import { WLR } from '../../../Stats/CustomRows';
+import { WLR } from "../../../Stats/CustomRows";
 
 type Props = Omit<IHungerGames, "season">;
 
@@ -33,9 +33,8 @@ const HungerGames: FunctionComponent<Props> = ({ global }) => (
           disableTouchListener
           title={
             <span className="badgeTooltip">
-              Приведённые данные могут отличаться от реальных, поскольку они не
-              были предоставлены API VimeWorld и рассчитаны сайтом, исходя из
-              уже имеющихся данных.
+              Приведённые данные могут отличаться от реальных, поскольку они не были предоставлены API VimeWorld и
+              рассчитаны сайтом, исходя из уже имеющихся данных.
             </span>
           }
         >
@@ -51,16 +50,14 @@ const HungerGames: FunctionComponent<Props> = ({ global }) => (
             disableTouchListener
             title={
               <span className="badgeTooltip">
-                Приведённые данные могут отличаться от реальных, поскольку они
-                не были предоставлены API VimeWorld и рассчитаны сайтом, исходя
-                из уже имеющихся данных.
+                Приведённые данные могут отличаться от реальных, поскольку они не были предоставлены API VimeWorld и
+                рассчитаны сайтом, исходя из уже имеющихся данных.
               </span>
             }
           >
             <InfoRoundedIcon fontSize="inherit" />
           </Tooltip>{" "}
-          <strong>Соотношение У/С:</strong>{" "}
-          {(global["kills"] / (global["games"] - global["wins"])).toFixed(2)}
+          <strong>Соотношение У/С:</strong> {(global["kills"] / (global["games"] - global["wins"])).toFixed(2)}
         </Typography>
       )}
     </Grid>

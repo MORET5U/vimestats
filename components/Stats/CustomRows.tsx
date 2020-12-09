@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { Tooltip, Typography } from '@material-ui/core';
+import { Tooltip, Typography } from "@material-ui/core";
 
 /**
  * BUG:
@@ -29,9 +29,7 @@ export const KDR = ({ kills, deaths }: IKDR) => (
         arrow
         disableFocusListener
         disableTouchListener
-        title={
-          <span className="badgeTooltip">Соотношение убийств к смертям</span>
-        }
+        title={<span className="badgeTooltip">Соотношение убийств к смертям</span>}
       >
         <Typography>
           <strong>Соотношение У/C:</strong> {(kills / deaths).toFixed(2)}
@@ -47,8 +45,7 @@ export const WLR = ({ wins, total, isTotal }: IWLR) => (
       <>
         {isTotal && (
           <Typography>
-            <strong>Процент общих побед:</strong>{" "}
-            {((wins / total) * 100).toFixed(2)}%
+            <strong>Процент общих побед:</strong> {((wins / total) * 100).toFixed(2)}%
           </Typography>
         )}
 

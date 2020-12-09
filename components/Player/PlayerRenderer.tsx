@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { Box, Container, Grid, Paper } from '@material-ui/core';
+import { Box, Container, Grid, Paper } from "@material-ui/core";
 
-import { UserData } from '../../interfaces';
-import Layout from '../Layout';
-import Friends from './subcomponents/Friends';
-import General from './subcomponents/General';
-import Leveling from './subcomponents/Leveling';
-import Skin from './subcomponents/Skin';
-import Stats from './subcomponents/Stats';
-import Times from './subcomponents/Times';
+import { UserData } from "../../interfaces";
+import Layout from "../Layout";
+import Friends from "./subcomponents/Friends";
+import General from "./subcomponents/General";
+import Leveling from "./subcomponents/Leveling";
+import Skin from "./subcomponents/Skin";
+import Stats from "./subcomponents/Stats";
+import Times from "./subcomponents/Times";
 
 type Props = {
   data: UserData;

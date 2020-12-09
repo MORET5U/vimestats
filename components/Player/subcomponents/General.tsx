@@ -1,10 +1,10 @@
-import Badges from 'components/Badges';
-import { Fragment, FunctionComponent } from 'react';
-import { IGuildSimple } from 'vime-types/models/Guild';
+import Badges from "components/Badges";
+import { Fragment, FunctionComponent } from "react";
+import { IGuildSimple } from "vime-types/models/Guild";
 
-import { Avatar, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Grid, makeStyles, Typography } from "@material-ui/core";
 
-import { IModifiedUser } from '../../../interfaces';
+import { IModifiedUser } from "../../../interfaces";
 
 type Props = {
   user: IModifiedUser;
