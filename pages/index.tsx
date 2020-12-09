@@ -35,7 +35,7 @@ const IndexPage: NextPage = () => {
       <Container maxW="3xl">
         <Box marginY={4}>
           <form onSubmit={handleSubmit}>
-            <Input value={state.query} onChange={handleChange} placeholder="Введите никнейм" isFullWidth />
+            <Input value={state.query} onChange={handleChange} placeholder="Введите никнейм" />
           </form>
         </Box>
       </Container>
