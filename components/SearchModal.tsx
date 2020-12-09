@@ -10,7 +10,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import { ValidUsernames } from "utils/regulars";
 
 interface SearchModalProps {
@@ -24,15 +24,16 @@ const SearchModal: FC<SearchModalProps> = ({ isOpen, onClose, value, setValue })
   const router = useRouter();
   const [isInvalid, setValidity] = useState(false);
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    setValue(inputValue);
-    if (!ValidUsernames.test(inputValue)) {
+  useEffect(() => {
+    if (!ValidUsernames.test(value)) {
       setValidity(true);
     } else {
       setValidity(false);
     }
+  }, [value]);
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
