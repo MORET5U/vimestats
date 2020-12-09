@@ -1,7 +1,7 @@
 import GoogleFonts from "next-google-fonts";
 import Head from "next/head";
 import React, { Fragment } from "react";
-import Header from "./Header";
+import Navigation from "./Navigation";
 
 type Props = {
   title?: string;
@@ -38,7 +38,7 @@ const Layout: React.FunctionComponent<Props> = ({
       </Head>
 
       <Fragment>
-        <Header />
+        <Navigation />
         {children}
       </Fragment>
     </Fragment>
