@@ -39,6 +39,7 @@ const SearchModal: FC<SearchModalProps> = ({ isOpen, onClose, value, setValue })
     e.preventDefault();
 
     if (!isInvalid) {
+      onClose();
       router.push(`/player/${encodeURIComponent(value)}`);
     }
   };
