@@ -1,23 +1,25 @@
-import React, { FC, createRef, useState } from "react";
+import { HamburgerIcon, MoonIcon, SearchIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Flex,
-  Text,
   Button,
-  IconButton,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerBody,
-  VStack,
   Divider,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  HStack,
+  IconButton,
+  Text,
+  useColorMode,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
-import { HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
+import SearchModal from "./SearchModal";
+import Link from "next/link";
+import React, { createRef, FC, useState } from "react";
 import { FaDiscord, FaGithub, FaHome, FaShieldAlt } from "react-icons/fa";
 import { MdExposureNeg1 } from "react-icons/md";
-import Link from "next/link";
-import SearchModal from "./SearchModal";
 
 interface DrawerButtonProps {
   title: string;
@@ -40,8 +42,10 @@ const Navigation: FC = () => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isSearchOpen, onOpen: onSearchOpen, onClose: onSearchClose } = useDisclosure();
+  const menuDrawer = useDisclosure();
+  const searchModal = useDisclosure();
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
@@ -49,12 +53,18 @@ const Navigation: FC = () => {
         <Flex align="center">
           <IconButton
             ref={menuButtonRef!}
-            onClick={onOpen}
+            onClick={menuDrawer.onOpen}
             variant="outlined"
             icon={<HamburgerIcon />}
             aria-label="Drawer Menu"
           />
-          <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={menuButtonRef} size="xs">
+          <Drawer
+            isOpen={menuDrawer.isOpen}
+            placement="left"
+            onClose={menuDrawer.onClose}
+            finalFocusRef={menuButtonRef}
+            size="xs"
+          >
             <DrawerOverlay>
               <DrawerContent>
                 <DrawerBody>
@@ -93,11 +103,31 @@ const Navigation: FC = () => {
             direction={["column", "row", "row", "row"]}
             pt={[4, 4, 0, 0]}
           >
-            <IconButton onClick={onSearchOpen} size="sm" rounded="md" icon={<SearchIcon />} aria-label="Поиск игрока" />
+            <HStack spacing={2}>
+              <IconButton
+                onClick={toggleColorMode}
+                aria-label="Изменить тему"
+                size="sm"
+                rounded="md"
+                icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              />
+              <IconButton
+                onClick={searchModal.onOpen}
+                size="sm"
+                rounded="md"
+                icon={<SearchIcon />}
+                aria-label="Поиск игрока"
+              />
+            </HStack>
           </Flex>
         </Box>
       </Flex>
-      <SearchModal onClose={onSearchClose} isOpen={isSearchOpen} value={searchQuery} setValue={setSearchQuery} />
+      <SearchModal
+        onClose={searchModal.onClose}
+        isOpen={searchModal.isOpen}
+        value={searchQuery}
+        setValue={setSearchQuery}
+      />
     </>
   );
 };
