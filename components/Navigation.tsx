@@ -12,6 +12,7 @@ import {
   IconButton,
   Text,
   useColorMode,
+  useColorModeValue,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -46,10 +47,11 @@ const Navigation: FC = () => {
   const searchModal = useDisclosure();
 
   const { colorMode, toggleColorMode } = useColorMode();
+  const barShadow = useColorModeValue("md", "xl");
 
   return (
     <>
-      <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" mb={8} p={3} boxShadow="md">
+      <Flex as="nav" align="center" justify="space-between" wrap="wrap" w="100%" mb={8} p={3} boxShadow={barShadow}>
         <Flex align="center">
           <IconButton
             ref={menuButtonRef!}
