@@ -1,49 +1,36 @@
+import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import Badges from "components/Badges";
 import Link from "next/link";
 import { FC, Fragment, memo } from "react";
-
-import { Grid, Paper, Tooltip, Typography } from "@material-ui/core";
-import LensRoundedIcon from "@material-ui/icons/LensRounded";
-
+import { PLAYER_3D_HEAD } from "utils/fallbacks";
 import { IOnlineModer } from "../../interfaces";
-import { useStyles } from "./Styles";
-
 type Props = {
   data: IOnlineModer;
 };
 
 const StaffCard: FC<Props> = ({ data: { username, skinHelm3D, online, flags, rankColor, humanizedRank } }) => {
-  const classes = useStyles();
-
   return (
     <Fragment>
       <Link href="/player/[name]" as={"/player/" + encodeURIComponent(username)}>
-        <a className={classes.link}>
-          <Paper className="gridItem" variant="outlined">
-            <Grid container spacing={1}>
-              <Grid item>
-                <img className="skinHelm" src={`${skinHelm3D}`} alt="Скин" width="64" />
-              </Grid>
+        <a className="staff_card__link">
+          <Box w="100%" borderWidth="1px" borderRadius="lg" p={3}>
+            <HStack spacing={2}>
+              <Image src={skinHelm3D} fallbackSrc={PLAYER_3D_HEAD} width="64px" height="64px" />
 
-              <Grid item xs sm>
-                <Typography variant="h5" className={classes.username}>
-                  <Tooltip
-                    title={<span className={classes.tooltip}>{online.message}</span>}
-                    arrow
-                    disableFocusListener
-                    disableTouchListener
-                    placement="top"
-                  >
-                    <LensRoundedIcon className="onlineIcon" style={{ verticalAlign: "-0.2rem" }} />
-                  </Tooltip>{" "}
+              <VStack spacing={0} align="flex-start">
+                <Text fontSize="2xl" my={0}>
                   {username}
-                </Typography>
-                <Typography variant="h5" style={{ color: rankColor }} className={classes.rank}>
-                  {flags !== undefined && flags > 0 && <Badges flags={flags} />} {humanizedRank}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Paper>
+                </Text>
+
+                <HStack spacing={0}>
+                  {flags !== undefined && flags > 0 && <Badges flags={flags} />}
+                  <Text fontSize="2xl" color={rankColor} my={0}>
+                    {humanizedRank?.toUpperCase()}
+                  </Text>
+                </HStack>
+              </VStack>
+            </HStack>
+          </Box>
         </a>
       </Link>
     </Fragment>
