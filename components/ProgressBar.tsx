@@ -1,16 +1,16 @@
+import { useColorModeValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NProgress from "nprogress";
 import { FC, useEffect } from "react";
 
 type Props = {
-  color?: string;
   startPosition?: number;
   stopDelayMs?: number;
   height?: number;
   options?: any;
 };
 
-const ProgressBar: FC<Props> = ({ color = "#29D", startPosition = 0.3, stopDelayMs = 200, height = 3, options }) => {
+const ProgressBar: FC<Props> = ({ startPosition = 0.3, stopDelayMs = 200, height = 3, options }) => {
   const router = useRouter();
 
   let timer: any = null;
@@ -28,6 +28,8 @@ const ProgressBar: FC<Props> = ({ color = "#29D", startPosition = 0.3, stopDelay
     }, stopDelayMs);
   };
 
+  const progressBarColor = useColorModeValue("#000000", "#AD87F3");
+
   useEffect(() => {
     if (options) {
       NProgress.configure(options);
@@ -44,7 +46,7 @@ const ProgressBar: FC<Props> = ({ color = "#29D", startPosition = 0.3, stopDelay
         pointer-events: none;
       }
       #nprogress .bar {
-        background: ${color};
+        background: ${progressBarColor};
         position: fixed;
         z-index: 5000;
         top: 0;
@@ -58,7 +60,7 @@ const ProgressBar: FC<Props> = ({ color = "#29D", startPosition = 0.3, stopDelay
         right: 0px;
         width: 100px;
         height: 100%;
-        box-shadow: 0 0 10px ${color}, 0 0 5px ${color};
+        box-shadow: 0 0 10px ${progressBarColor}, 0 0 5px ${progressBarColor};
         opacity: 1;
         -webkit-transform: rotate(3deg) translate(0px, -4px);
         -ms-transform: rotate(3deg) translate(0px, -4px);
@@ -76,8 +78,8 @@ const ProgressBar: FC<Props> = ({ color = "#29D", startPosition = 0.3, stopDelay
         height: 42px;
         box-sizing: border-box;
         border: solid 5px transparent;
-        border-top-color: ${color};
-        border-left-color: ${color};
+        border-top-color: ${progressBarColor};
+        border-left-color: ${progressBarColor};
         border-radius: 50%;
         -webkit-animation: nprogresss-spinner 400ms linear infinite;
         animation: nprogress-spinner 400ms linear infinite;
