@@ -1,35 +1,7 @@
+import { Icon, Tooltip } from "@chakra-ui/react";
 import { FC, Fragment, ReactElement } from "react";
+import { FaCheck, FaHeart, FaStar, FaThumbsUp } from "react-icons/fa";
 import { Flags } from "utils/enums";
-
-import { makeStyles } from "@material-ui/core";
-import Tooltip from "@material-ui/core/Tooltip";
-import DoneOutlineRoundedIcon from "@material-ui/icons/DoneOutlineRounded";
-import FavoriteRoundedIcon from "@material-ui/icons/FavoriteRounded";
-import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import ThumbUpRoundedIcon from "@material-ui/icons/ThumbUpRounded";
-
-const useStyles = makeStyles(() => ({
-  developer: {
-    color: "#ad87f3 !important",
-    fontSize: "1.45rem !important",
-    verticalAlign: "-0.09em !important",
-  },
-  admin: {
-    color: "#fbb848 !important",
-    fontSize: "1.8rem !important",
-    verticalAlign: "-0.28rem !important",
-  },
-  supporter: {
-    color: "#d43e3e !important",
-    fontSize: "1.7rem !important",
-    verticalAlign: "-0.22rem !important",
-  },
-  bestmod: {
-    color: "#4777e6 !important",
-    fontSize: "1.75rem !important",
-    verticalAlign: "-0.25rem !important",
-  },
-}));
 
 interface TooltipProps {
   title: string;
@@ -37,12 +9,7 @@ interface TooltipProps {
 }
 
 const BadgeTooltip: FC<TooltipProps> = ({ children, title }) => (
-  <Tooltip
-    disableFocusListener
-    disableTouchListener
-    title={<span className="badgeTooltip">{title}</span>}
-    placement="top"
-  >
+  <Tooltip label={title} placement="top" shouldWrapChildren fontSize="md" backgroundColor="black" color="white">
     {children}
   </Tooltip>
 );
@@ -52,31 +19,29 @@ interface Props {
 }
 
 const Badges: FC<Props> = ({ flags }) => {
-  const classes = useStyles();
-
   return (
     <Fragment>
       {(flags & Flags.developer) === Flags.developer && (
         <BadgeTooltip title="Разработчик VimeStats">
-          <ThumbUpRoundedIcon className={"playerBadge " + classes.developer} />
+          <Icon as={FaThumbsUp} className="playerBadge" color="brand.200" boxSize={6} />
         </BadgeTooltip>
       )}
 
       {(flags & Flags.admin) === Flags.admin && (
         <BadgeTooltip title="Админ Тысячелетия">
-          <StarRoundedIcon className={"playerBadge " + classes.admin} />
+          <Icon as={FaStar} className="playerBadge" color="orange.300" boxSize={6} />
         </BadgeTooltip>
       )}
 
       {(flags & Flags.supporter) === Flags.supporter && (
         <BadgeTooltip title="Раннее Поддержавшие">
-          <FavoriteRoundedIcon className={"playerBadge " + classes.supporter} />
+          <Icon as={FaHeart} className="playerBadge" color="red.600" boxSize={6} />
         </BadgeTooltip>
       )}
 
       {(flags & Flags.bestmod) === Flags.bestmod && (
         <BadgeTooltip title="Бывалый Модератор">
-          <DoneOutlineRoundedIcon className={"playerBadge " + classes.bestmod} />
+          <Icon as={FaCheck} className="playerBadge" color="#4777e6" boxSize={6} />
         </BadgeTooltip>
       )}
     </Fragment>
