@@ -15,6 +15,14 @@ const customTheme = extendTheme({
       900: "#0c011c",
     },
   },
+  // styles: {
+  //   global: ({ colorMode }) => ({
+  //     body: {
+  //       bg: colorMode !== "dark" ? "white" : "#171717",
+  //       lineHeight: "base",
+  //     },
+  //   }),
+  // },
 });
 
 export default customTheme;
