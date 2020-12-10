@@ -46,7 +46,7 @@ const DemotionsRenderer: FC<Props> = ({ data }) => {
     <Container maxW="4xl">
       <form onSubmit={handleSubmit}>
         <InputGroup>
-          <Input value={query} placeholder="Введите запрос" onChange={handleInput} />
+          <Input value={query} placeholder="Введите запрос" onChange={handleInput} focusBorderColor="brand.200" />
           <InputRightElement>
             <IconButton icon={<MdClear />} aria-label="Clear Query" variant="outlined" onClick={resetData} />
           </InputRightElement>
