@@ -2,7 +2,7 @@ import Axios, { AxiosError } from "axios";
 import StaffCard from "components/OnlineStaff/StaffCard";
 import { NextPage } from "next";
 
-import { Container, Grid } from "@material-ui/core";
+import { Container, SimpleGrid } from "@chakra-ui/react";
 
 import Layout from "../../components/Layout";
 import { IOnlineModer } from "../../interfaces";
@@ -25,18 +25,16 @@ const StaffPage: NextPage<Props> = ({ data, errors }) => {
 
   return (
     <Layout title="Онлайн модеры | VimeStats" description="Список онлайн модераторов на VimeWorld MiniGames">
-      <Container maxWidth="lg">
+      <Container maxW="6xl">
         {data !== undefined && data.length <= 0 && <p>Тишина...</p>}
 
         {data !== undefined && data.length > 0 && (
           <>
-            <Grid container spacing={2}>
+            <SimpleGrid minChildWidth="300px" gap={3}>
               {data.map((moder) => (
-                <Grid item xs={12} md={4} sm={12} key={moder.id}>
-                  <StaffCard data={moder} />
-                </Grid>
+                <StaffCard key={moder.id} data={moder} />
               ))}
-            </Grid>
+            </SimpleGrid>
           </>
         )}
       </Container>
