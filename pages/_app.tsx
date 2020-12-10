@@ -9,6 +9,7 @@ import { FC, Fragment } from "react";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { Global, css } from "@emotion/react";
 import ProgressBar from "../components/ProgressBar";
+import customTheme from "components/customTheme";
 
 const FocusOutlineHidden = css`
   .js-focus-visible :focus:not([data-focus-visible-added]) {
@@ -20,7 +21,7 @@ const FocusOutlineHidden = css`
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <Fragment>
-      <ChakraProvider>
+      <ChakraProvider theme={customTheme}>
         <CSSReset />
         <Global styles={FocusOutlineHidden} />
         <ProgressBar height={6} options={{ showSpinner: true }} />
