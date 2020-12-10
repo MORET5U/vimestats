@@ -1,8 +1,6 @@
+import { Box, Button, Container, Divider, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { FunctionComponent } from "react";
-
-import { Box, Button, Container, Divider, Typography } from "@material-ui/core";
-
 import Layout from "../Layout";
 
 type Props = {
@@ -12,26 +10,26 @@ type Props = {
 const UnknownPlayer: FunctionComponent<Props> = ({ query }) => {
   return (
     <Layout title="Ошибка | VimeStats">
-      <Container maxWidth="md">
+      <Container maxW="2xl">
         <Box mt={20} mb={2}>
-          <Typography variant="h3">
+          <Text fontSize="2xl">
             <strong>404:</strong> Not found
-          </Typography>
+          </Text>
         </Box>
 
         <Divider />
 
         <Box my={2}>
-          <Typography variant="h5">
+          <Text fontSize="lg">
             Игрок <strong>{query}</strong> не найден.
-          </Typography>
+          </Text>
         </Box>
 
         <Divider />
 
         <Box mt={2}>
           <Link href="/" as="/">
-            <Button variant="outlined">НА ГЛАВНУЮ</Button>
+            <Button variant="ghost">НА ГЛАВНУЮ</Button>
           </Link>
         </Box>
       </Container>
