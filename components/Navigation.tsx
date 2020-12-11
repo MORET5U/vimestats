@@ -16,11 +16,11 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import SearchModal from "./SearchModal";
 import Link from "next/link";
 import React, { createRef, FC, useState } from "react";
 import { FaDiscord, FaGithub, FaHome, FaShieldAlt } from "react-icons/fa";
 import { MdExposureNeg1 } from "react-icons/md";
+import SearchModal from "./SearchModal";
 
 interface DrawerButtonProps {
   title: string;
@@ -29,13 +29,21 @@ interface DrawerButtonProps {
 }
 
 const DrawerButton: FC<DrawerButtonProps> = ({ title, icon, href }) => (
-  <>
-    <Link href={href}>
-      <Button size="lg" variant="ghost" my={2} paddingLeft={2} justifyContent="left" leftIcon={icon} isFullWidth>
-        {title}
-      </Button>
-    </Link>
-  </>
+  <Link href={href}>
+    <Button
+      as="a"
+      size="lg"
+      variant="ghost"
+      cursor="pointer"
+      my={2}
+      paddingLeft={2}
+      justifyContent="left"
+      leftIcon={icon}
+      isFullWidth
+    >
+      {title}
+    </Button>
+  </Link>
 );
 
 const Navigation: FC = () => {
