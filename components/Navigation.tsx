@@ -99,7 +99,7 @@ const Navigation: FC = () => {
                     <DrawerButton
                       title="Исходный код"
                       icon={<FaGithub />}
-                      href="https://github.com/defracted/snowflake"
+                      href="https://github.com/defracted/vimestats"
                     />
                   </VStack>
                 </DrawerBody>
