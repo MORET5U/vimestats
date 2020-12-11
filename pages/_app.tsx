@@ -1,15 +1,17 @@
-import "../styles/main.scss";
+import { ChakraProvider, CSSReset } from "@chakra-ui/react";
+import { css, Global } from "@emotion/react";
+import customTheme from "components/customTheme";
+import "focus-visible/dist/focus-visible";
+import moment from "moment";
+import "moment/locale/ru";
+import { AppProps } from "next/app";
+import { FC, Fragment, useEffect } from "react";
+import ProgressBar from "../components/ProgressBar";
 import "../styles/badges.scss";
 import "../styles/darkscroller.scss";
 import "../styles/demotions.scss";
+import "../styles/main.scss";
 import "../styles/player.scss";
-import "focus-visible/dist/focus-visible";
-import { AppProps } from "next/app";
-import { FC, Fragment } from "react";
-import { ChakraProvider, CSSReset } from "@chakra-ui/react";
-import { Global, css } from "@emotion/react";
-import ProgressBar from "../components/ProgressBar";
-import customTheme from "components/customTheme";
 
 const FocusOutlineHidden = css`
   .js-focus-visible :focus:not([data-focus-visible-added]) {
@@ -19,6 +21,10 @@ const FocusOutlineHidden = css`
 `;
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+  useEffect(() => {
+    moment.locale("ru");
+  }, []);
+
   return (
     <Fragment>
       <ChakraProvider theme={customTheme}>
