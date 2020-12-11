@@ -19,7 +19,7 @@ const customTheme = extendTheme({
     Tooltip: {
       baseStyle: {
         fontSize: "md",
-        backgroundColor: "black",
+        bg: "black",
         color: "white",
       },
     },
