@@ -10,7 +10,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import { ValidUsernames } from "utils/regulars";
 
 interface SearchModalProps {
@@ -24,6 +24,26 @@ const SearchModal: FC<SearchModalProps> = ({ isOpen, onClose, value, setValue })
   const router = useRouter();
   const [isInvalid, setValidity] = useState(false);
 
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      switch (e.key) {
+        case "Enter": {
+          if (!isInvalid) {
+            onClose();
+            router.push(`/player/${encodeURIComponent(value)}`);
+          }
+          break;
+        }
+      }
+    },
+    [value, router]
+  );
+
+  /** Checks the validity of a username **/
   useEffect(() => {
     if (!ValidUsernames.test(value)) {
       setValidity(true);
@@ -32,46 +52,41 @@ const SearchModal: FC<SearchModalProps> = ({ isOpen, onClose, value, setValue })
     }
   }, [value]);
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!isInvalid) {
-      onClose();
-      router.push(`/player/${encodeURIComponent(value)}`);
-    }
-  };
+  /** Clears input value **/
+  useEffect(() => {
+    setValue("");
+  }, [isOpen]);
 
   return (
     <>
       <Modal size="lg" isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
-          <form onSubmit={handleSubmit}>
-            <InputGroup>
-              <InputLeftElement>
-                <SearchIcon />
-              </InputLeftElement>
-              <Input
-                value={value}
-                placeholder="Введите ник"
-                variant="filled"
-                focusBorderColor="transparent"
-                borderColor="transparent"
-                size="md"
-                onChange={handleInput}
-                isInvalid={isInvalid}
-              />
-              <InputRightElement>
-                <span>
-                  <Kbd> ↵ </Kbd>
-                </span>
-              </InputRightElement>
-            </InputGroup>
-          </form>
+        <ModalContent overflow="hidden">
+          <InputGroup>
+            <InputLeftElement h="48px">
+              <SearchIcon my={0} />
+            </InputLeftElement>
+            <Input
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck="false"
+              placeholder="Введите ник"
+              variant="filled"
+              focusBorderColor="transparent"
+              borderColor="transparent"
+              h="48px"
+              maxLength={16} // 16 is the maximum length of a username
+              onChange={handleInput}
+              isInvalid={isInvalid}
+              value={value}
+              onKeyDown={onKeyDown}
+            />
+            <InputRightElement h="48px">
+              <span>
+                <Kbd> ↵ </Kbd>
+              </span>
+            </InputRightElement>
+          </InputGroup>
         </ModalContent>
       </Modal>
     </>
