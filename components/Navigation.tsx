@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { createRef, FC, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { FaDiscord, FaGithub, FaHome, FaShieldAlt } from "react-icons/fa";
 import { MdExposureNeg1 } from "react-icons/md";
 import SearchModal from "./SearchModal";
@@ -56,6 +57,15 @@ const Navigation: FC = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
   const barShadow = useColorModeValue("md", "xl");
+
+  useHotkeys(
+    "ctrl+k,ctrl+f",
+    (e) => {
+      e.preventDefault();
+      document.getElementById("omni_search_btn__players")?.click();
+    },
+    { keydown: true, keyup: false }
+  );
 
   return (
     <>
@@ -127,6 +137,7 @@ const Navigation: FC = () => {
                 rounded="md"
                 icon={<SearchIcon />}
                 aria-label="Поиск игрока"
+                id="omni_search_btn__players"
               />
             </HStack>
           </Flex>
