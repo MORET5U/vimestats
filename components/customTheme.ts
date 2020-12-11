@@ -15,6 +15,15 @@ const customTheme = extendTheme({
       900: "#0c011c",
     },
   },
+  components: {
+    Tooltip: {
+      baseStyle: {
+        fontSize: "md",
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+  },
   // styles: {
   //   global: ({ colorMode }) => ({
   //     body: {
