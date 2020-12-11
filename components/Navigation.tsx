@@ -11,6 +11,7 @@ import {
   HStack,
   IconButton,
   Text,
+  Tooltip,
   useColorMode,
   useColorModeValue,
   useDisclosure,
@@ -124,21 +125,26 @@ const Navigation: FC = () => {
             pt={[4, 4, 0, 0]}
           >
             <HStack spacing={2}>
-              <IconButton
-                onClick={toggleColorMode}
-                aria-label="Изменить тему"
-                size="sm"
-                rounded="md"
-                icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-              />
-              <IconButton
-                onClick={searchModal.onOpen}
-                size="sm"
-                rounded="md"
-                icon={<SearchIcon />}
-                aria-label="Поиск игрока"
-                id="omni_search_btn__players"
-              />
+              <Tooltip label="Сменить тему" placement="bottom" shouldWrapChildren>
+                <IconButton
+                  onClick={toggleColorMode}
+                  aria-label="Изменить тему"
+                  size="sm"
+                  rounded="md"
+                  icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                />
+              </Tooltip>
+
+              <Tooltip label="Поиск (CTRL + K)" placement="bottom" shouldWrapChildren>
+                <IconButton
+                  onClick={searchModal.onOpen}
+                  size="sm"
+                  rounded="md"
+                  icon={<SearchIcon />}
+                  aria-label="Поиск игрока"
+                  id="omni_search_btn__players"
+                />
+              </Tooltip>
             </HStack>
           </Flex>
         </Box>
