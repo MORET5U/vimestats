@@ -9,7 +9,7 @@ interface TooltipProps {
 }
 
 const BadgeTooltip: FC<TooltipProps> = ({ children, title }) => (
-  <Tooltip label={title} placement="top" shouldWrapChildren fontSize="md" backgroundColor="black" color="white">
+  <Tooltip label={title} placement="top" shouldWrapChildren>
     {children}
   </Tooltip>
 );
