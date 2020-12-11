@@ -33,7 +33,6 @@ interface DrawerButtonProps {
 const DrawerButton: FC<DrawerButtonProps> = ({ title, icon, href }) => (
   <Link href={href}>
     <Button
-      as="a"
       size="lg"
       variant="ghost"
       cursor="pointer"
