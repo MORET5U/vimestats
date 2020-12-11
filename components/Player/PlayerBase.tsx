@@ -35,11 +35,7 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
       <Container maxW="6xl">
         <Box>
           {!isNil(user) && (
-            <Grid
-              templateColumns={{ lg: "3fr 6fr", base: "1fr" }}
-              templateRows={{ lg: "1fr", base: "1fr 1fr 1fr 1fr 1fr 1fr" }}
-              gap={2}
-            >
+            <Grid templateColumns={{ lg: "3fr 6fr", base: "1fr" }} gap={2}>
               <GridItem>
                 <VStack spacing={2}>
                   <PlayerSmallCard {...playerSmallCard} />
