@@ -4,6 +4,7 @@ import { isNil, merge, pick } from "lodash";
 import React, { useState } from "react";
 import { UserData } from "../../interfaces";
 import Layout from "../Layout";
+import PlayerFriends from "./PlayerFriends";
 import PlayerLevel from "./PlayerLevel";
 import PlayerSkin from "./PlayerSkin";
 import PlayerSmallCard from "./PlayerSmallCard";
@@ -24,6 +25,7 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
   const playerTimeAndStatusProps = merge(session!, pick(user, ["playedSeconds", "lastSeen"]));
   const playerLevelProps = pick(user, ["level", "levelPercentage"]);
   const playerSkinProps = merge(pick(user, ["username"]), { skin, cape });
+  const playerFriendsProps = merge({ friends }, pick(user, ["username"]));
 
   return (
     <Layout
@@ -50,13 +52,23 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
                   <Paper>
                     <Breadcrumb spacing="8px">
                       <BreadcrumbItem>
-                        <Button onClick={() => setTab("stats")} isActive={currentTab === "stats"} size="sm">
+                        <Button
+                          variant="ghost"
+                          onClick={() => setTab("stats")}
+                          isActive={currentTab === "stats"}
+                          size="sm"
+                        >
                           Статистика
                         </Button>
                       </BreadcrumbItem>
 
                       <BreadcrumbItem>
-                        <Button onClick={() => setTab("friends")} isActive={currentTab === "friends"} size="sm">
+                        <Button
+                          variant="ghost"
+                          onClick={() => setTab("friends")}
+                          isActive={currentTab === "friends"}
+                          size="sm"
+                        >
                           Друзья
                         </Button>
                       </BreadcrumbItem>
@@ -64,7 +76,7 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
                   </Paper>
 
                   {currentTab === "stats" && <Box w="100%" h="120px" bg="green.200"></Box>}
-                  {currentTab === "friends" && <Box w="100%" h="120px" bg="red.200"></Box>}
+                  {currentTab === "friends" && <PlayerFriends {...playerFriendsProps} />}
                 </VStack>
               </GridItem>
             </Grid>
