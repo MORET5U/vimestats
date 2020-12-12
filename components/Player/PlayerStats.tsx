@@ -20,6 +20,7 @@ import { Duels } from "./PlayerStats/Duels";
 import { GunGame } from "./PlayerStats/GunGame";
 import { HungerGames } from "./PlayerStats/HungerGames";
 import { JumpLeague } from "./PlayerStats/JumpLeague";
+import { KitPVP } from "./PlayerStats/KitPVP";
 
 interface StatGroupProps {
   title: string;
@@ -37,7 +38,7 @@ const StatGroup: FC<StatGroupProps> = ({ title, children }) => (
   </AccordionItem>
 );
 
-const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS, GG, HG, JUMPLEAGUE }) => {
+const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS, GG, HG, JUMPLEAGUE, KPVP }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
   return (
@@ -83,6 +84,10 @@ const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS, GG, 
 
             <StatGroup title="Jump League">
               <JumpLeague JUMPLEAGUE={JUMPLEAGUE} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="KitPVP">
+              <KitPVP KPVP={KPVP} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
