@@ -26,6 +26,7 @@ import { MobWars } from "./PlayerStats/MobWats";
 import { Murder } from "./PlayerStats/Murder";
 import { SkyWars } from "./PlayerStats/SkyWars";
 import { TNTRun } from "./PlayerStats/TNTRun";
+import { TNTTag } from "./PlayerStats/TNTTag";
 
 interface StatGroupProps {
   title: string;
@@ -60,6 +61,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
   MURDER,
   SW,
   TNTRUN,
+  TNTTAG,
 }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
@@ -130,6 +132,10 @@ const PlayerStats: FC<IUserStatsGroup> = ({
 
             <StatGroup title="TNT Run">
               <TNTRun TNTRUN={TNTRUN} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="TNT Tag">
+              <TNTTag TNTTAG={TNTTAG} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
