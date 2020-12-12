@@ -25,6 +25,7 @@ import { LuckyWars } from "./PlayerStats/LuckyWars";
 import { MobWars } from "./PlayerStats/MobWats";
 import { Murder } from "./PlayerStats/Murder";
 import { SkyWars } from "./PlayerStats/SkyWars";
+import { TheBridge } from "./PlayerStats/TheBridge";
 import { TNTRun } from "./PlayerStats/TNTRun";
 import { TNTTag } from "./PlayerStats/TNTTag";
 
@@ -62,6 +63,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
   SW,
   TNTRUN,
   TNTTAG,
+  BRIDGE,
 }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
@@ -136,6 +138,10 @@ const PlayerStats: FC<IUserStatsGroup> = ({
 
             <StatGroup title="TNT Tag">
               <TNTTag TNTTAG={TNTTAG} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="The Bridge">
+              <TheBridge BRIDGE={BRIDGE} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
