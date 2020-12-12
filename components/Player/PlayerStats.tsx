@@ -22,6 +22,7 @@ import { HungerGames } from "./PlayerStats/HungerGames";
 import { JumpLeague } from "./PlayerStats/JumpLeague";
 import { KitPVP } from "./PlayerStats/KitPVP";
 import { LuckyWars } from "./PlayerStats/LuckyWars";
+import { MobWars } from "./PlayerStats/MobWats";
 
 interface StatGroupProps {
   title: string;
@@ -39,7 +40,21 @@ const StatGroup: FC<StatGroupProps> = ({ title, children }) => (
   </AccordionItem>
 );
 
-const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS, GG, HG, JUMPLEAGUE, KPVP, LUCKYWARS }) => {
+const PlayerStats: FC<IUserStatsGroup> = ({
+  ANN,
+  BW,
+  BP,
+  BB,
+  CP,
+  DR,
+  DUELS,
+  GG,
+  HG,
+  JUMPLEAGUE,
+  KPVP,
+  LUCKYWARS,
+  MW,
+}) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
   return (
@@ -93,6 +108,10 @@ const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS, GG, 
 
             <StatGroup title="Lucky Wars">
               <LuckyWars LUCKYWARS={LUCKYWARS} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="Mob Wars">
+              <MobWars MW={MW} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
