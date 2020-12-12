@@ -8,6 +8,7 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import Paper from "components/Paper";
 import { FC, Fragment } from "react";
 import { IUserStatsGroup } from "vime-types/models/Stats";
 import { Annihilation } from "./PlayerStats/Annihilation";
@@ -34,14 +35,14 @@ interface StatGroupProps {
 }
 
 const StatGroup: FC<StatGroupProps> = ({ title, children }) => (
-  <AccordionItem>
+  <AccordionItem borderTop={0}>
     <AccordionButton>
       <Box flex="1" textAlign="left" fontWeight="bold">
         {title}
       </Box>
       <AccordionIcon />
     </AccordionButton>
-    <AccordionPanel pb={4}>{children}</AccordionPanel>
+    <AccordionPanel px={0}>{children}</AccordionPanel>
   </AccordionItem>
 );
 
@@ -69,7 +70,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
 
   return (
     <Fragment>
-      <Box w="100%" mb="32px">
+      <Paper mb="32px">
         <VStack align="stretch" spacing={2}>
           <Accordion allowToggle allowMultiple>
             <StatGroup title="Annihilation">
@@ -145,7 +146,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
             </StatGroup>
           </Accordion>
         </VStack>
-      </Box>
+      </Paper>
     </Fragment>
   );
 };
