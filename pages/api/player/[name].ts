@@ -1,120 +1,91 @@
-import Axios from "axios";
-import { IModifiedUser, UserData } from "interfaces";
+import axios from "axios";
 import { steveSkinURI } from "libs/skinview-utils";
+import { random } from "lodash";
 import { NextApiRequest, NextApiResponse } from "next";
 import { processUser } from "utils/processing";
-import { v4 as uuid } from "uuid";
+import { ValidUsernames } from "utils/regulars";
 import { IError } from "vime-types/models/Errors";
 import { IUser, IUserSession, IUserStatsRaw } from "vime-types/models/User";
 
-import Validator from "../../../utils/validation";
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async ({ query }: NextApiRequest, res: NextApiResponse) => {
   try {
-    const {
-      query: { name },
-    } = req;
-
-    // We should test the username first
-    const isUsernameValid = Validator.validateUsername(<string>name);
+    const name = query.name.toString();
+    const { VIME_API_URI, VIME_API_KEY } = process.env;
 
     // In case of invalid username we throw 400 HTTP with JSON
-    if (!isUsernameValid) {
-      res.status(400).json({
+    if (!ValidUsernames.test(name))
+      return res.status(400).json({
         error: { message: "Invalid playername requested", code: 400 },
       });
 
-      return;
-    }
+    // Predefined headers object
+    const headers = { "Access-Token": VIME_API_KEY };
 
-    // If validation was successful we proceed to fetching user data
-    const user: IUser = await Axios.get(`${process.env.VIME_API_URI}/user/name/${name}`, {
-      headers: { "Access-Token": process.env.VIME_API_KEY },
-    })
+    // Get user data and process it
+    const user_data: IUser = await axios
+      .get(`${VIME_API_URI}/user/name/${name}`, { headers })
       .then(({ data }) => data[0])
-      .catch((error: Error) => {
-        throw error;
+      .catch((e) => {
+        throw e;
       });
 
-    // If there's no player with such username we return 404 HTTP with JSON
-    if (!user) {
+    if (!user_data) {
       res.status(404).json({ error: { message: "Player not found", code: 404 } });
       return;
     }
+    const user = await processUser(user_data, { noGuild: true });
 
-    // We process the data
-    const processedUser = await processUser(user, { noGuild: true });
+    // Obtain guild data object from raw data
+    const guild = user_data.guild;
 
-    // We should get user's skin and cape as well as other data and include data URI
-    const skinDataURI = await Axios.get(`http://skin.vimeworld.ru/game/v2/skin/${user.username}.png?_=${uuid()}`, {
-      responseType: "arraybuffer",
-    })
+    // Get the skin data
+    const rnd_num = random(10000, 100000, false);
+    const skin = await axios
+      .get(`https://skin.vimeworld.ru/game/v2/skin/${user.username}.png?_=${rnd_num}`, {
+        responseType: "arraybuffer",
+      })
       .then(({ data }) => Buffer.from(data, "binary").toString("base64"))
       .then((b64) => `data:image/png;base64,${b64}`)
-      .catch((_e: any) => steveSkinURI);
+      .catch(() => steveSkinURI);
 
-    // We should get user's skin as well as other data and include data URI
-    const capeDataURI = await Axios.get(`https://skin.vimeworld.ru/game/v2/cape/${user.username}.png?_=${uuid()}`, {
-      responseType: "arraybuffer",
-    })
+    // Get cape data
+    const cape = await axios
+      .get(`https://skin.vimeworld.ru/game/v2/cape/${user.username}.png?_=${rnd_num}`, {
+        responseType: "arraybuffer",
+      })
       .then(({ data }) => Buffer.from(data, "binary").toString("base64"))
       .then((b64) => `data:image/png;base64,${b64}`)
-      .catch((_e: any) => undefined);
+      .catch(() => undefined);
 
-    // Separate guild object from user data
-    const guild = user.guild;
-
-    // Proceed to gettting session data
-    const session: IUserSession = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/session`, {
-      headers: { "Access-Token": process.env.VIME_API_KEY },
-    })
+    // Get session data
+    const session: IUserSession = await axios
+      .get(`${VIME_API_URI}/user/${user.id}/session`, { headers })
       .then(({ data }) => data.online)
-      .catch((err: Error) => {
-        throw err;
+      .catch((e) => {
+        throw e;
       });
 
-    // Getting friends data
-    let friends: IUser[] | null = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/friends`, {
-      headers: { "Access-Token": process.env.VIME_API_KEY },
-    })
-      .then(({ data }) => data.friends)
-      .catch((err: Error) => {
-        throw err;
+    // Get friends list
+    const friends = await axios
+      .get(`${VIME_API_URI}/user/${user.id}/friends`, { headers })
+      .then((r) => r.data.friends)
+      .then((data: IUser[]) => {
+        return Promise.all(data.map((friend) => processUser(friend)));
+      })
+      .catch((e) => {
+        throw e;
       });
 
-    let friendsProcessed: IModifiedUser[] | null = [];
-    if (friends) {
-      if (friends.length > 0) {
-        for (let i = 0; i < friends.length; i++) {
-          let friend = friends[i];
-          friendsProcessed[i] = await processUser(friend);
-        }
-      } else {
-        friendsProcessed = null;
-      }
-    }
-
-    // Time to get stats
-    const stats = await Axios.get(`${process.env.VIME_API_URI}/user/${user.id}/stats`, {
-      headers: { "Access-Token": process.env.VIME_API_KEY },
-    })
-      .then((res) => res.data)
-      .then((data: IUserStatsRaw & IError) => data.stats)
-      .catch((err: Error) => {
-        throw err;
+    // Get stats of the player
+    const stats = await axios
+      .get(`${VIME_API_URI}/user/${user.id}/stats`, { headers })
+      .then((r) => <IUserStatsRaw & IError>r.data)
+      .then((data) => data.stats)
+      .catch((e) => {
+        throw e;
       });
 
-    const resultingData: UserData = {
-      user: processedUser,
-      guild: guild,
-      session: session,
-      friends: friendsProcessed,
-      stats: stats,
-      skin: skinDataURI,
-      cape: capeDataURI,
-    };
-
-    res.status(200).json(resultingData);
+    res.status(200).json({ user, guild, session, skin, cape, friends, stats });
   } catch (err) {
     res.status(500).json({ statusCode: 500, message: err.message });
   }
