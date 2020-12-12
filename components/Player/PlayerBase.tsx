@@ -1,5 +1,4 @@
 import { Box, Breadcrumb, BreadcrumbItem, Button, Container, Grid, GridItem, VStack } from "@chakra-ui/react";
-import Paper from "components/Paper";
 import { isNil, merge, pick } from "lodash";
 import React, { useState } from "react";
 import { UserData } from "../../interfaces";
@@ -8,6 +7,7 @@ import PlayerFriends from "./PlayerFriends";
 import PlayerLevel from "./PlayerLevel";
 import PlayerSkin from "./PlayerSkin";
 import PlayerSmallCard from "./PlayerSmallCard";
+import PlayerStats from "./PlayerStats";
 import PlayerTimeAndStatus from "./PlayerTimeAndStatus";
 
 type Props = {
@@ -49,7 +49,7 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
 
               <GridItem>
                 <VStack>
-                  <Paper>
+                  <Box w="100%" mb="8px">
                     <Breadcrumb spacing="8px">
                       <BreadcrumbItem>
                         <Button
@@ -73,9 +73,9 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
                         </Button>
                       </BreadcrumbItem>
                     </Breadcrumb>
-                  </Paper>
+                  </Box>
 
-                  {currentTab === "stats" && <Box w="100%" h="120px" bg="green.200"></Box>}
+                  {currentTab === "stats" && <PlayerStats {...stats} />}
                   {currentTab === "friends" && <PlayerFriends {...playerFriendsProps} />}
                 </VStack>
               </GridItem>
