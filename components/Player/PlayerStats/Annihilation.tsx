@@ -2,10 +2,10 @@ import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { FC, Fragment } from "react";
 import { IUserStatsGroup } from "vime-types/models/Stats";
 
-const Annihilation: FC<Pick<IUserStatsGroup, "ANN">> = ({ ANN }) => {
+export const Annihilation: FC<Pick<IUserStatsGroup, "ANN">> = ({ ANN }) => {
   return (
     <Fragment>
-      <Table variant="simple">
+      <Table variant="simple" size="sm">
         <Thead>
           <Tr>
             <Th></Th>
@@ -49,5 +49,3 @@ const Annihilation: FC<Pick<IUserStatsGroup, "ANN">> = ({ ANN }) => {
     </Fragment>
   );
 };
-
-export default Annihilation;

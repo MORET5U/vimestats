@@ -3,10 +3,14 @@ import { FC, Fragment } from "react";
 import { countKillDeathRate, countWinRate } from "utils/processing";
 import { IUserStatsGroup } from "vime-types/models/Stats";
 
-const BedWars: FC<Pick<IUserStatsGroup, "BW">> = ({ BW }) => {
+interface BWAdditionalProps {
+  bgColor: string;
+}
+
+export const BedWars: FC<Pick<IUserStatsGroup, "BW"> & BWAdditionalProps> = ({ BW, bgColor }) => {
   return (
     <Fragment>
-      <Table variant="simple">
+      <Table variant="simple" size="sm">
         <Thead>
           <Tr>
             <Th></Th>
@@ -27,7 +31,7 @@ const BedWars: FC<Pick<IUserStatsGroup, "BW">> = ({ BW }) => {
             <Td isNumeric>{BW.season.monthly.wins}</Td>
           </Tr>
 
-          <Tr>
+          <Tr bg={bgColor}>
             <Td>Процент побед</Td>
             <Td isNumeric>{countWinRate(BW.global.games, BW.global.wins).toFixed(2)}%</Td>
             <Td isNumeric>{countWinRate(BW.season.monthly.games, BW.season.monthly.wins).toFixed(2)}%</Td>
@@ -45,7 +49,7 @@ const BedWars: FC<Pick<IUserStatsGroup, "BW">> = ({ BW }) => {
             <Td isNumeric>{BW.season.monthly.deaths}</Td>
           </Tr>
 
-          <Tr>
+          <Tr bg={bgColor}>
             <Td>У/С</Td>
             <Td isNumeric>{countKillDeathRate(BW.global.kills, BW.global.deaths).toFixed(2)}</Td>
             <Td isNumeric>{countKillDeathRate(BW.season.monthly.kills, BW.season.monthly.deaths).toFixed(2)}</Td>
@@ -61,5 +65,3 @@ const BedWars: FC<Pick<IUserStatsGroup, "BW">> = ({ BW }) => {
     </Fragment>
   );
 };
-
-export default BedWars;
