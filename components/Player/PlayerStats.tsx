@@ -69,7 +69,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
 
   return (
     <Fragment>
-      <Box w="100%" mb="8px">
+      <Box w="100%" mb="32px">
         <VStack align="stretch" spacing={2}>
           <Accordion allowToggle allowMultiple>
             <StatGroup title="Annihilation">
