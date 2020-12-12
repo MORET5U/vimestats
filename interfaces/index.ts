@@ -24,7 +24,7 @@ export type UserData = {
   session?: IUserSession;
   /** @deprecated Not used anywhere */
   matches?: IUserMatch[];
-  friends: IModifiedUser[] | null;
+  friends: IModifiedUser[];
   stats: IUserStatsGroup;
   skin: string;
   cape?: string;
