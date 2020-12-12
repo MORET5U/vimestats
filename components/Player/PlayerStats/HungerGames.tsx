@@ -63,7 +63,7 @@ export const HungerGames: FC<Pick<IUserStatsGroup, "HG"> & HGAdtionalProps> = ({
             <AssumedValued>
               <Icon as={IoWarningOutline} />
             </AssumedValued>{" "}
-            Соотношение У/С
+            У/С
           </Td>
           <Td isNumeric>{countKillDeathRate(HG.global.kills, globalDeaths).toFixed(2)}</Td>
           <Td isNumeric>{countKillDeathRate(HG.season.monthly.kills, monthlyDeaths).toFixed(2)}</Td>
