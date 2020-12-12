@@ -2,7 +2,7 @@ import Axios from "axios";
 import { IModifiedUser, UserData } from "interfaces";
 import { steveSkinURI } from "libs/skinview-utils";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Processors } from "utils/processing";
+import { processUser } from "utils/processing";
 import { v4 as uuid } from "uuid";
 import { IError } from "vime-types/models/Errors";
 import { IUser, IUserSession, IUserStatsRaw } from "vime-types/models/User";
@@ -43,7 +43,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // We process the data
-    const processedUser = await Processors.user(user, { noGuild: true });
+    const processedUser = await processUser(user, { noGuild: true });
 
     // We should get user's skin and cape as well as other data and include data URI
     const skinDataURI = await Axios.get(`http://skin.vimeworld.ru/game/v2/skin/${user.username}.png?_=${uuid()}`, {
@@ -87,7 +87,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (friends.length > 0) {
         for (let i = 0; i < friends.length; i++) {
           let friend = friends[i];
-          friendsProcessed[i] = await Processors.user(friend);
+          friendsProcessed[i] = await processUser(friend);
         }
       } else {
         friendsProcessed = null;
