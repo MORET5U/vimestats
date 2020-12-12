@@ -17,6 +17,9 @@ import { BuildBattle } from "./PlayerStats/BuildBattles";
 import { ClashPoint } from "./PlayerStats/ClashPoint";
 import { DeathRun } from "./PlayerStats/DeathRun";
 import { Duels } from "./PlayerStats/Duels";
+import { GunGame } from "./PlayerStats/GunGame";
+import { HungerGames } from "./PlayerStats/HungerGames";
+import { JumpLeague } from "./PlayerStats/JumpLeague";
 
 interface StatGroupProps {
   title: string;
@@ -34,7 +37,7 @@ const StatGroup: FC<StatGroupProps> = ({ title, children }) => (
   </AccordionItem>
 );
 
-const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS }) => {
+const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS, GG, HG, JUMPLEAGUE }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
   return (
@@ -51,7 +54,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS }) =>
             </StatGroup>
 
             <StatGroup title="Block Party">
-              <BlockParty BP={BP } bgColor={rowBgColor} />
+              <BlockParty BP={BP} bgColor={rowBgColor} />
             </StatGroup>
 
             <StatGroup title="Build Battle">
@@ -68,6 +71,18 @@ const PlayerStats: FC<IUserStatsGroup> = ({ ANN, BW, BP, BB, CP, DR, DUELS }) =>
 
             <StatGroup title="Duels">
               <Duels DUELS={DUELS} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="Gun Game">
+              <GunGame GG={GG} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="Hunger Games">
+              <HungerGames HG={HG} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="Jump League">
+              <JumpLeague JUMPLEAGUE={JUMPLEAGUE} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
