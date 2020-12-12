@@ -41,8 +41,8 @@ export const JumpLeague: FC<Pick<IUserStatsGroup, "JUMPLEAGUE"> & JLAdditionalPr
         <Td isNumeric>{JUMPLEAGUE.global.deaths}</Td>
       </Tr>
 
-      <Tr>
-        <Td>Соотношение У/C</Td>
+      <Tr bgColor={bgColor}>
+        <Td>У/C</Td>
         <Td isNumeric>{countKillDeathRate(JUMPLEAGUE.global.kills, JUMPLEAGUE.global.deaths).toFixed(2)}</Td>
       </Tr>
 
