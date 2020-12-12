@@ -30,8 +30,7 @@ const handler = async ({ query }: NextApiRequest, res: NextApiResponse) => {
       });
 
     if (!user_data) {
-      res.status(404).json({ error: { message: "Player not found", code: 404 } });
-      return;
+      return res.status(404).json({ error: { message: "Player not found", code: 404 } });
     }
     const user = await processUser(user_data, { noGuild: true });
 
