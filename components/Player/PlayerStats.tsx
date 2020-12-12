@@ -23,6 +23,7 @@ import { JumpLeague } from "./PlayerStats/JumpLeague";
 import { KitPVP } from "./PlayerStats/KitPVP";
 import { LuckyWars } from "./PlayerStats/LuckyWars";
 import { MobWars } from "./PlayerStats/MobWats";
+import { Murder } from "./PlayerStats/Murder";
 
 interface StatGroupProps {
   title: string;
@@ -54,6 +55,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
   KPVP,
   LUCKYWARS,
   MW,
+  MURDER,
 }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
@@ -112,6 +114,10 @@ const PlayerStats: FC<IUserStatsGroup> = ({
 
             <StatGroup title="Mob Wars">
               <MobWars MW={MW} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="Murder Mystery">
+              <Murder MURDER={MURDER} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
