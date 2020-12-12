@@ -24,6 +24,7 @@ import { KitPVP } from "./PlayerStats/KitPVP";
 import { LuckyWars } from "./PlayerStats/LuckyWars";
 import { MobWars } from "./PlayerStats/MobWats";
 import { Murder } from "./PlayerStats/Murder";
+import { SkyWars } from "./PlayerStats/SkyWars";
 
 interface StatGroupProps {
   title: string;
@@ -56,6 +57,7 @@ const PlayerStats: FC<IUserStatsGroup> = ({
   LUCKYWARS,
   MW,
   MURDER,
+  SW,
 }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
@@ -118,6 +120,10 @@ const PlayerStats: FC<IUserStatsGroup> = ({
 
             <StatGroup title="Murder Mystery">
               <Murder MURDER={MURDER} bgColor={rowBgColor} />
+            </StatGroup>
+
+            <StatGroup title="Sky Wars">
+              <SkyWars SW={SW} bgColor={rowBgColor} />
             </StatGroup>
           </Accordion>
         </VStack>
