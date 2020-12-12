@@ -1,24 +1,29 @@
-import Axios from "axios";
+import axios from "axios";
+import { IModifiedUser } from "interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 import { processUser } from "utils/processing";
 import { IUser } from "vime-types/models/User";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async ({ query }: NextApiRequest, res: NextApiResponse) => {
   try {
-    let { sort } = req.query;
-    sort = sort.toString().toLowerCase() || "total";
+    const sort = query.sort.toString().toLowerCase() || "total";
+    let resultingData: IModifiedUser[] | any;
 
-    let resultingData;
-
-    if (sort === "total") {
-      let apiReq = await Axios.get(`${process.env.VIME_API_URI}/online`);
-
-      resultingData = await apiReq.data;
-    } else if (sort === "staff") {
-      let apiReq = await Axios.get(`${process.env.VIME_API_URI}/online/staff`);
-      let apiData: IUser[] = await apiReq.data;
-
-      resultingData = await Promise.all(apiData.map(async (u) => await processUser(u)));
+    switch (sort) {
+      case "staff":
+        resultingData = await axios
+          .get(`${process.env.VIME_API_URI}/online/staff`)
+          .then((r) => r.data)
+          .then((data: IUser[]) => Promise.all(data.map((user) => processUser(user))));
+        break;
+      default:
+        resultingData = await axios
+          .get(`${process.env.VIME_API_URI}/online`)
+          .then(({ data }) => data)
+          .catch((e) => {
+            throw e;
+          });
+        break;
     }
 
     res.status(200).json(resultingData);

@@ -1,7 +1,7 @@
 import { Center, Icon, Image, Table, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react";
 import Paper from "components/Paper";
 import { IModifiedUser, UserData } from "interfaces";
-import { isNil } from "lodash";
+import { isEmpty } from "lodash";
 import { useRouter } from "next/router";
 import { FC, memo } from "react";
 import { FaRegSadTear } from "react-icons/fa";
@@ -18,7 +18,7 @@ const PlayerFriends: FC<PlayerFriendsProps> = ({ friends, username }) => {
 
   return (
     <Paper>
-      {isNil(friends) && (
+      {isEmpty(friends) && (
         <Center>
           <Text fontSize="lg" my="16px">
             <Icon as={FaRegSadTear} boxSize={6} /> {username} довольно одинокий игрок...
@@ -26,7 +26,7 @@ const PlayerFriends: FC<PlayerFriendsProps> = ({ friends, username }) => {
         </Center>
       )}
 
-      {!isNil(friends) && (
+      {!isEmpty(friends) && (
         <Table variant="simple">
           <Thead>
             <Tr>
