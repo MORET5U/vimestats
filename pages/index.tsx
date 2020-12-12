@@ -2,8 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-import { Box, Container } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import { Container, Box, Input } from "@chakra-ui/react";
 
 import Layout from "../components/Layout";
 import { MySweetAlert } from "../components/MySweetAlert";
@@ -14,9 +13,7 @@ const IndexPage: NextPage = () => {
   const router = useRouter();
   const [state, setState] = useState(initialState);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ query: e.target.value.trim() });
-  };
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => setState({ query: event.target.value.trim() });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,17 +32,14 @@ const IndexPage: NextPage = () => {
 
   return (
     <Layout>
-      <Container maxWidth="md">
-        <Box my={4} component="div">
+      <Container maxW="3xl">
+        <Box marginY={4}>
           <form onSubmit={handleSubmit}>
-            <TextField
-              onInput={handleInput}
-              id="outlined-basic"
-              label="Введите никнейм"
-              variant="outlined"
-              fullWidth
-              type="text"
-              autoComplete="username"
+            <Input
+              value={state.query}
+              onChange={handleChange}
+              placeholder="Введите никнейм"
+              focusBorderColor="brand.200"
             />
           </form>
         </Box>

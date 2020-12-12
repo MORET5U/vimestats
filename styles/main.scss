@@ -73,3 +73,13 @@
     font-weight: 700;
   }
 }
+
+.staff_card__link {
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.staff_card__link:hover {
+  opacity: 0.7;
+}

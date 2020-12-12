@@ -1,11 +1,9 @@
 import Axios, { AxiosError } from "axios";
+import Errors from "components/Errors";
 import { NextPage, NextPageContext } from "next";
 import { Fragment } from "react";
-
 import Layout from "../../components/Layout";
-import BadQuery from "../../components/Player/BadQuery";
-import PlayerRenderer from "../../components/Player/PlayerRenderer";
-import UnknownPlayer from "../../components/Player/UnknownPlayer";
+import PlayerBase from "../../components/Player/PlayerBase";
 import { UserData } from "../../interfaces";
 
 type Props = {
@@ -17,11 +15,19 @@ type Props = {
 const PlayerPage: NextPage<Props> = ({ errors, data }) => {
   if (errors) {
     if (errors.code == 404) {
-      return <UnknownPlayer query={errors.query} />;
+      return (
+        <Errors code={404} meaning="Not found" description={`Игрок ${errors.query} не найден.`} />
+      );
     }
 
     if (errors.code == 400) {
-      return <BadQuery />;
+      return (
+        <Errors
+          code={400}
+          meaning="Bad request"
+          description="Убедитесь в правильности запрошенного имени и попробуйте снова.<br />Не забывайте, что можно использовать только латинские символы!"
+        />
+      );
     }
 
     return (
@@ -33,7 +39,7 @@ const PlayerPage: NextPage<Props> = ({ errors, data }) => {
     );
   }
 
-  return <Fragment>{data && <PlayerRenderer data={data} />} </Fragment>;
+  return <Fragment>{data && <PlayerBase data={data} />} </Fragment>;
 };
 
 PlayerPage.getInitialProps = async ({ query }: NextPageContext) => {

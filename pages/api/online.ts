@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Processors } from "utils/processing";
+import { processUser } from "utils/processing";
 import { IUser } from "vime-types/models/User";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       let apiReq = await Axios.get(`${process.env.VIME_API_URI}/online/staff`);
       let apiData: IUser[] = await apiReq.data;
 
-      resultingData = await Promise.all(apiData.map(async (u) => await Processors.user(u)));
+      resultingData = await Promise.all(apiData.map(async (u) => await processUser(u)));
     }
 
     res.status(200).json(resultingData);
