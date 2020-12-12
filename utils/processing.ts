@@ -100,3 +100,11 @@ export const processUser = async (user: IUser, { noGuild } = userProcessorDefaul
 
   return newUser;
 };
+
+export const countWinRate = (total: number, wins: number) => {
+  return total > 0 ? (wins / total) * 100 : wins * 100;
+};
+
+export const countKillDeathRate = (kills: number, deaths: number) => {
+  return deaths > 0 ? kills / deaths : kills;
+};
