@@ -58,6 +58,7 @@ const Navigation: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const barShadow = useColorModeValue("md", "xl");
 
+  // Search hotkeys
   useHotkeys(
     "ctrl+k,ctrl+f",
     (e) => {
@@ -76,7 +77,7 @@ const Navigation: FC = () => {
             onClick={menuDrawer.onOpen}
             variant="outlined"
             icon={<HamburgerIcon />}
-            aria-label="Drawer Menu"
+            aria-label="Меню"
           />
           <Drawer
             isOpen={menuDrawer.isOpen}
@@ -104,7 +105,7 @@ const Navigation: FC = () => {
                     <DrawerButton
                       title="Предложить идею"
                       icon={<FaLightbulb />}
-                      href="https://github.com/defracted/vimestats/discussions"
+                      href="https://github.com/defracted/vimestats/discussions?discussions_q=category%3A%D0%98%D0%B4%D0%B5%D0%B8"
                     />
                   </VStack>
                 </DrawerBody>
