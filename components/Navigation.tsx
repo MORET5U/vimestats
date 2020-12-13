@@ -20,7 +20,7 @@ import {
 import Link from "next/link";
 import React, { createRef, FC, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { FaDiscord, FaGithub, FaHome, FaShieldAlt } from "react-icons/fa";
+import { FaDiscord, FaGithub, FaHome, FaLightbulb, FaShieldAlt } from "react-icons/fa";
 import { MdExposureNeg1 } from "react-icons/md";
 import SearchModal from "./SearchModal";
 
@@ -100,6 +100,11 @@ const Navigation: FC = () => {
                       title="Исходный код"
                       icon={<FaGithub />}
                       href="https://github.com/defracted/vimestats"
+                    />
+                    <DrawerButton
+                      title="Предложить идею"
+                      icon={<FaLightbulb />}
+                      href="https://github.com/defracted/vimestats/discussions"
                     />
                   </VStack>
                 </DrawerBody>
