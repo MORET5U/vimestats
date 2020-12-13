@@ -3,13 +3,19 @@ import Paper from "components/Paper";
 import { IModifiedUser, UserData } from "interfaces";
 import { isEmpty } from "lodash";
 import { useRouter } from "next/router";
-import { FC, memo } from "react";
+import { FC } from "react";
 import { FaRegSadTear } from "react-icons/fa";
 import { PLAYER_3D_HEAD } from "utils/fallbacks";
 
-type PlayerFriendsProps = Pick<UserData, "friends"> & Pick<IModifiedUser, "username">;
+interface PlayerFriendsProps {
+  isShown: boolean;
+}
 
-const PlayerFriends: FC<PlayerFriendsProps> = ({ friends, username }) => {
+const PlayerFriends: FC<Pick<UserData, "friends"> & Pick<IModifiedUser, "username"> & PlayerFriendsProps> = ({
+  friends,
+  username,
+  isShown,
+}) => {
   const router = useRouter();
 
   const onRowClick = (username: string) => {
@@ -17,7 +23,7 @@ const PlayerFriends: FC<PlayerFriendsProps> = ({ friends, username }) => {
   };
 
   return (
-    <Paper>
+    <Paper display={isShown ? "block" : "none"}>
       {isEmpty(friends) && (
         <Center>
           <Text fontSize="lg" my="16px">
@@ -65,4 +71,5 @@ const PlayerFriends: FC<PlayerFriendsProps> = ({ friends, username }) => {
     </Paper>
   );
 };
-export default memo(PlayerFriends);
+
+export default PlayerFriends;

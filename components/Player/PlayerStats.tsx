@@ -9,7 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Paper from "components/Paper";
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import { IUserStatsGroup } from "vime-types/models/Stats";
 import { Annihilation } from "./PlayerStats/Annihilation";
 import { BedWars } from "./PlayerStats/BedWars";
@@ -46,7 +46,11 @@ const StatGroup: FC<StatGroupProps> = ({ title, children }) => (
   </AccordionItem>
 );
 
-const PlayerStats: FC<IUserStatsGroup> = ({
+interface PlayerStatsProps {
+  isShown: boolean;
+}
+
+const PlayerStats: FC<IUserStatsGroup & PlayerStatsProps> = ({
   ANN,
   BW,
   BP,
@@ -65,90 +69,88 @@ const PlayerStats: FC<IUserStatsGroup> = ({
   TNTRUN,
   TNTTAG,
   BRIDGE,
+  isShown,
 }) => {
   const rowBgColor = useColorModeValue("gray.100", "gray.900");
 
   return (
-    <Fragment>
-      <Paper mb="32px">
-        <VStack align="stretch" spacing={2}>
-          <Accordion allowToggle allowMultiple>
-            <StatGroup title="Annihilation">
-              <Annihilation ANN={ANN} />
-            </StatGroup>
+    <Paper mb="32px" display={isShown ? "block" : "none"}>
+      <VStack align="stretch" spacing={2}>
+        <Accordion allowToggle allowMultiple>
+          <StatGroup title="Annihilation">
+            <Annihilation ANN={ANN} />
+          </StatGroup>
 
-            <StatGroup title="Bed Wars">
-              <BedWars BW={BW} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Bed Wars">
+            <BedWars BW={BW} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Block Party">
-              <BlockParty BP={BP} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Block Party">
+            <BlockParty BP={BP} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Build Battle">
-              <BuildBattle BB={BB} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Build Battle">
+            <BuildBattle BB={BB} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Clash Point">
-              <ClashPoint CP={CP} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Clash Point">
+            <ClashPoint CP={CP} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Death Run">
-              <DeathRun DR={DR} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Death Run">
+            <DeathRun DR={DR} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Duels">
-              <Duels DUELS={DUELS} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Duels">
+            <Duels DUELS={DUELS} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Gun Game">
-              <GunGame GG={GG} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Gun Game">
+            <GunGame GG={GG} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Hunger Games">
-              <HungerGames HG={HG} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Hunger Games">
+            <HungerGames HG={HG} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Jump League">
-              <JumpLeague JUMPLEAGUE={JUMPLEAGUE} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Jump League">
+            <JumpLeague JUMPLEAGUE={JUMPLEAGUE} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="KitPVP">
-              <KitPVP KPVP={KPVP} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="KitPVP">
+            <KitPVP KPVP={KPVP} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Lucky Wars">
-              <LuckyWars LUCKYWARS={LUCKYWARS} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Lucky Wars">
+            <LuckyWars LUCKYWARS={LUCKYWARS} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Mob Wars">
-              <MobWars MW={MW} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Mob Wars">
+            <MobWars MW={MW} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Murder Mystery">
-              <Murder MURDER={MURDER} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Murder Mystery">
+            <Murder MURDER={MURDER} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="Sky Wars">
-              <SkyWars SW={SW} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="Sky Wars">
+            <SkyWars SW={SW} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="TNT Run">
-              <TNTRun TNTRUN={TNTRUN} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="TNT Run">
+            <TNTRun TNTRUN={TNTRUN} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="TNT Tag">
-              <TNTTag TNTTAG={TNTTAG} bgColor={rowBgColor} />
-            </StatGroup>
+          <StatGroup title="TNT Tag">
+            <TNTTag TNTTAG={TNTTAG} bgColor={rowBgColor} />
+          </StatGroup>
 
-            <StatGroup title="The Bridge">
-              <TheBridge BRIDGE={BRIDGE} bgColor={rowBgColor} />
-            </StatGroup>
-          </Accordion>
-        </VStack>
-      </Paper>
-    </Fragment>
+          <StatGroup title="The Bridge">
+            <TheBridge BRIDGE={BRIDGE} bgColor={rowBgColor} />
+          </StatGroup>
+        </Accordion>
+      </VStack>
+    </Paper>
   );
 };
-
 export default PlayerStats;

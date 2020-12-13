@@ -75,8 +75,8 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
                     </Breadcrumb>
                   </Box>
 
-                  {currentTab === "stats" && <PlayerStats {...stats} />}
-                  {currentTab === "friends" && <PlayerFriends {...playerFriendsProps} />}
+                  <PlayerStats isShown={currentTab === "stats"} {...stats} />
+                  <PlayerFriends isShown={currentTab === "friends"} {...playerFriendsProps} />
                 </VStack>
               </GridItem>
             </Grid>
