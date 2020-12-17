@@ -20,7 +20,7 @@ import {
 import Link from "next/link";
 import React, { createRef, FC, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { FaDiscord, FaGithub, FaHome, FaLightbulb, FaShieldAlt } from "react-icons/fa";
+import { FaDiscord, FaDollarSign, FaGithub, FaHome, FaLightbulb, FaShieldAlt } from "react-icons/fa";
 import { MdExposureNeg1 } from "react-icons/md";
 import SearchModal from "./SearchModal";
 
@@ -107,6 +107,7 @@ const Navigation: FC = () => {
                       icon={<FaLightbulb />}
                       href="https://github.com/defracted/vimestats/discussions?discussions_q=category%3A%D0%98%D0%B4%D0%B5%D0%B8"
                     />
+                    <DrawerButton title="Поддержать" icon={<FaDollarSign />} href="https://boosty.to/defracted" />
                   </VStack>
                 </DrawerBody>
               </DrawerContent>
