@@ -29,8 +29,8 @@ const PlayerBase: React.FunctionComponent<Props> = ({ data }) => {
 
   return (
     <Layout
-      title={"[" + user?.humanizedRank + "] " + user?.username + " | VimeStats"}
-      description={"Статистика игрока VimeWorld - " + user?.username + " | Уровень: " + user?.level}
+      title={`[${user.humanizedRank}] ${user.username} — VimeStats`}
+      description={`${user.humanizedRank} - ${user.rank} уровень`}
       color={user?.rankColor || "transparent"}
       iconURL={user?.skinHelm3D}
     >
