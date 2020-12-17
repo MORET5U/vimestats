@@ -6,3 +6,20 @@ export enum Flags {
   supporter = 1 << 2,
   bestmod = 1 << 3,
 }
+
+export enum Ranks {
+  PLAYER = "PLAYER",
+  VIP = "VIP",
+  PREMIUM = "PREMIUM",
+  HOLY = "HOLY",
+  IMMORTAL = "IMMORTAL",
+  BUILDER = "BUILDER",
+  MAPLEAD = "MAPLEAD",
+  YOUTUBE = "YOUTUBE",
+  DEV = "DEV",
+  ORGANIZER = "ORGANIZER",
+  MODER = "MODER",
+  WARDEN = "WARDEN",
+  CHIEF = "CHIEF",
+  ADMIN = "ADMIN",
+}
