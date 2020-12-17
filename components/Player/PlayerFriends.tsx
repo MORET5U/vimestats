@@ -5,7 +5,9 @@ import { isEmpty } from "lodash";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { FaRegSadTear } from "react-icons/fa";
+import { Ranks } from "utils/enums";
 import { PLAYER_3D_HEAD } from "utils/fallbacks";
+import { RANK_FIRST_UPPERCASE } from "utils/regulars";
 
 interface PlayerFriendsProps {
   isShown: boolean;
@@ -33,7 +35,7 @@ const PlayerFriends: FC<Pick<UserData, "friends"> & Pick<IModifiedUser, "usernam
       )}
 
       {!isEmpty(friends) && (
-        <Table variant="simple">
+        <Table variant="simple" size="sm">
           <Thead>
             <Tr>
               <Th>Скин</Th>
@@ -60,7 +62,10 @@ const PlayerFriends: FC<Pick<UserData, "friends"> & Pick<IModifiedUser, "usernam
                     cursor="pointer"
                     onClick={() => onRowClick(friend.username)}
                   >
-                    [{friend.humanizedRank}] {friend.username}
+                    {friend.rank !== Ranks.PLAYER && (
+                      <>[{friend.humanizedRank?.match(RANK_FIRST_UPPERCASE)?.join("")}]</>
+                    )}{" "}
+                    {friend.username}
                   </Text>
                 </Td>
               </Tr>
